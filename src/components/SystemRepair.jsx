@@ -36,7 +36,28 @@ export default function SystemRepair({ connectedDevice, onNavigate, onPrepareFla
     'Screen Locked with Forgotten Pattern/PIN'
   ];
 
-  const issues = osType === 'ios' ? iosIssues : androidIssues;
+  const symbianIssues = [
+    'Nokia "Contact Service" Error on Display',
+    'Phone Vibrates Once But Display Stays Blank (Dead Boot)',
+    'Stuck on Nokia Shaking Hands Screen / Blue Display',
+    'Blinking "Test Mode" or "Local Mode" on Startup',
+    'Phone Restarts Automatically Every 2-3 Minutes (Watchdog Reset)',
+    'Symbian Belle / S60 Corrupted System ROM'
+  ];
+
+  const javaIssues = [
+    'Nokia Series 40 / Asha "White Screen of Death"',
+    'Keypad Phone Constantly Freezing on Power On',
+    'Samsung Guru / Metro Restart Loop or Auto Shutoff',
+    'Sony Ericsson Red LED Blinking (EROM / GDFS Error)',
+    'Java (J2ME) Midlet Database Corrupted / App Launch Crash',
+    'Lost Security Master Code / Keypad Security Code'
+  ];
+
+  const issues = 
+    osType === 'ios' ? iosIssues :
+    osType === 'android' ? androidIssues :
+    osType === 'symbian' ? symbianIssues : javaIssues;
 
   const handleStartRepair = () => {
     // Direct user to Firmware Hub to acquire the specific verified firmware
@@ -54,34 +75,58 @@ export default function SystemRepair({ connectedDevice, onNavigate, onPrepareFla
           </span>
         </div>
         <p className="text-xs text-slate-400 mt-1">
-          Resolve over 150+ iOS and Android system errors, bootloops, frozen screens, and soft bricks.
+          Resolve over 200+ iOS, Android, Nokia Symbian, and Java feature phone system errors and soft bricks.
         </p>
       </div>
 
       {/* OS Type Selector */}
-      <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-center gap-3">
         <button
           onClick={() => { setOsType('ios'); setSelectedIssue(null); }}
-          className={`flex items-center gap-2 px-5 py-3 rounded-2xl font-bold text-xs transition border ${
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl font-bold text-xs transition border ${
             osType === 'ios'
               ? 'bg-brand-600 border-brand-500 text-white shadow-lg shadow-brand-600/30'
               : 'bg-surface-850 border-surface-750 text-slate-400 hover:text-white'
           }`}
         >
           <span className="text-sm"></span>
-          <span>Apple iOS / iPadOS Repair</span>
+          <span>Apple iOS</span>
         </button>
 
         <button
           onClick={() => { setOsType('android'); setSelectedIssue(null); }}
-          className={`flex items-center gap-2 px-5 py-3 rounded-2xl font-bold text-xs transition border ${
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl font-bold text-xs transition border ${
             osType === 'android'
               ? 'bg-brand-600 border-brand-500 text-white shadow-lg shadow-brand-600/30'
               : 'bg-surface-850 border-surface-750 text-slate-400 hover:text-white'
           }`}
         >
           <Smartphone className="w-4 h-4 text-emerald-400" />
-          <span>Android System Repair</span>
+          <span>Android OS</span>
+        </button>
+
+        <button
+          onClick={() => { setOsType('symbian'); setSelectedIssue(null); }}
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl font-bold text-xs transition border ${
+            osType === 'symbian'
+              ? 'bg-brand-600 border-brand-500 text-white shadow-lg shadow-brand-600/30'
+              : 'bg-surface-850 border-surface-750 text-slate-400 hover:text-white'
+          }`}
+        >
+          <span className="text-xs font-bold text-blue-400">S60</span>
+          <span>Symbian OS (Nokia)</span>
+        </button>
+
+        <button
+          onClick={() => { setOsType('java'); setSelectedIssue(null); }}
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl font-bold text-xs transition border ${
+            osType === 'java'
+              ? 'bg-brand-600 border-brand-500 text-white shadow-lg shadow-brand-600/30'
+              : 'bg-surface-850 border-surface-750 text-slate-400 hover:text-white'
+          }`}
+        >
+          <span className="text-xs font-bold text-amber-400">J2ME</span>
+          <span>Java & Keypad Phones</span>
         </button>
       </div>
 

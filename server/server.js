@@ -94,7 +94,10 @@ app.get('/api/firmware/brands', (req, res) => {
       { id: 'samsung', name: 'Samsung Galaxy', icon: 'Smartphone', count: 'Multi-CSC Stock ROMs' },
       { id: 'google', name: 'Google Pixel', icon: 'Globe', count: 'Official Factory Images' },
       { id: 'xiaomi', name: 'Xiaomi / Redmi / POCO', icon: 'Cpu', count: 'HyperOS & Fastboot ROMs' },
-      { id: 'oneplus', name: 'OnePlus', icon: 'Zap', count: 'OxygenOS Stock Packages' }
+      { id: 'oneplus', name: 'OnePlus', icon: 'Zap', count: 'OxygenOS Stock Packages' },
+      { id: 'nokia', name: 'Nokia (Symbian & S40 Java)', icon: 'Radio', count: 'S60 / Symbian^3 / S40' },
+      { id: 'sonyericsson', name: 'Sony Ericsson (Java & UIQ)', icon: 'Disc', count: 'Walkman / Cyber-shot / A2' },
+      { id: 'samsung_feature', name: 'Samsung Keypad (Java Feature)', icon: 'Smartphone', count: 'Guru Music / Metro / Duos' }
     ]
   });
 });

@@ -12,7 +12,9 @@ import {
   Cpu,
   Layers,
   FileCode,
-  HardDrive
+  HardDrive,
+  Radio,
+  Disc
 } from 'lucide-react';
 
 export default function FlasherWizard({ 
@@ -25,7 +27,7 @@ export default function FlasherWizard({
   onAbortFlash,
   onReboot 
 }) {
-  const [flashMode, setFlashMode] = useState('fastboot_partition'); // fastboot_partition, sideload, guided_samsung, guided_apple
+  const [flashMode, setFlashMode] = useState('fastboot_partition'); // fastboot_partition, sideload, guided_samsung, guided_apple, guided_nokia, guided_se, guided_samsung_keypad
   const [selectedPartition, setSelectedPartition] = useState('boot');
   const [filePath, setFilePath] = useState('');
   const [confirmedBackup, setConfirmedBackup] = useState(false);
@@ -42,6 +44,12 @@ export default function FlasherWizard({
         setFlashMode('guided_samsung');
       } else if (flashTarget.brand === 'apple') {
         setFlashMode('guided_apple');
+      } else if (flashTarget.brand === 'nokia') {
+        setFlashMode('guided_nokia');
+      } else if (flashTarget.brand === 'sonyericsson') {
+        setFlashMode('guided_se');
+      } else if (flashTarget.brand === 'samsung_feature') {
+        setFlashMode('guided_samsung_keypad');
       }
     }
   }, [flashTarget]);
@@ -112,6 +120,9 @@ export default function FlasherWizard({
           { id: 'sideload', title: 'ADB Sideload', desc: 'Install full OTA zip in recovery mode', icon: HardDrive },
           { id: 'guided_samsung', title: 'Samsung Odin Guide', desc: 'Stock 4-File (BL, AP, CP, CSC) flashing', icon: Layers },
           { id: 'guided_apple', title: 'Apple IPSW Restore', desc: 'DFU / Recovery mode official restore', icon: Smartphone },
+          { id: 'guided_nokia', title: 'Nokia Dead USB Flasher', desc: 'Phoenix & BEST S60/S40 Dead Mode', icon: Radio },
+          { id: 'guided_se', title: 'Sony Ericsson "C" Mode', desc: 'Hold "C" / 2+5 Key A2 Platform', icon: Disc },
+          { id: 'guided_samsung_keypad', title: 'Samsung Keypad FlashLoader', desc: 'Spreadtrum & Swift FlashLoader', icon: Smartphone },
         ].map((mode) => {
           const Icon = mode.icon;
           const isSelected = flashMode === mode.id;
@@ -382,6 +393,141 @@ export default function FlasherWizard({
                 2. Quickly press Vol Up, Vol Down, then hold Power for 10s until screen turns black.<br />
                 3. Keep holding Power and press Vol Down for 5s.<br />
                 4. Release Power but continue holding Vol Down for 10s. The screen must stay completely black while PC detects "Apple Mobile Device in Recovery Mode".
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mode Content: 4. Nokia Dead USB Flashing Guide */}
+      {flashMode === 'guided_nokia' && (
+        <div className="p-8 rounded-2xl bg-surface-850 border border-surface-750 space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+              <Radio className="w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-white">Nokia Symbian & S40 Dead USB Flashing</h2>
+              <p className="text-xs text-slate-400">Flash bricked Nokia Symbian (S60 / Belle) and Series 40 Java phones via Dead USB Mode</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {[
+              { slot: 'MCU / CORE', title: 'Main Code Unit', desc: 'Core operating system and boot code (.core.fpsx or .mcu)' },
+              { slot: 'PPM / ROFS2', title: 'Language & Fonts', desc: 'Regional language pack, fonts and dictionaries (.rofs2.fpsx or .ppm)' },
+              { slot: 'CNT / ROFS3', title: 'Content / Apps', desc: 'Default gallery media, ringtones and Java apps (.rofs3.fpsx or .image.fpsx)' },
+              { slot: 'APE / UDA', title: 'User Data / Variant', desc: 'Internal user disk initialization and operator settings (.uda.fpsx)' },
+            ].map((slot) => (
+              <div key={slot.slot} className="p-4 rounded-xl bg-surface-800/80 border border-surface-700">
+                <span className="w-auto px-2 h-7 rounded-lg bg-blue-500/20 text-blue-400 font-mono font-bold inline-flex items-center justify-center text-[10px] mb-2">
+                  {slot.slot}
+                </span>
+                <h4 className="font-bold text-white text-xs">{slot.title}</h4>
+                <p className="text-[11px] text-slate-400 mt-1">{slot.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="p-5 rounded-xl bg-surface-900/60 border border-surface-750 space-y-3">
+            <h3 className="font-bold text-white text-xs flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              How to Trigger Nokia Dead USB ROM Mode (Even if Phone Won't Turn On):
+            </h3>
+            <ol className="list-decimal list-inside space-y-1.5 text-xs text-slate-300">
+              <li>Open Phoenix Service Software or Infinity BEST (BB5 Easy Service Tool).</li>
+              <li>Select your Product RM code (e.g. <strong className="text-white">RM-596</strong> for N8, <strong className="text-white">RM-159</strong> for N95, <strong className="text-white">RM-217</strong> for 6300).</li>
+              <li>Tick <strong className="text-amber-400 font-semibold">Dead Phone USB Flashing</strong> in flashing settings.</li>
+              <li><strong className="text-white">Remove the phone battery</strong>, then connect the USB cable to PC.</li>
+              <li>Click <strong className="text-white">SW Update / Refurbish</strong> in the flasher.</li>
+              <li>Insert the battery back into the phone and press the <strong className="text-white">Power Button for 1 second</strong>.</li>
+              <li>Windows detects <code className="text-emerald-300">Nokia USB ROM (VID_0421)</code> and flashing begins immediately!</li>
+            </ol>
+          </div>
+        </div>
+      )}
+
+      {/* Mode Content: 5. Sony Ericsson Flash Mode Guide */}
+      {flashMode === 'guided_se' && (
+        <div className="p-8 rounded-2xl bg-surface-850 border border-surface-750 space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+              <Disc className="w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-white">Sony Ericsson Java (A2 Platform) Flashing Guide</h2>
+              <p className="text-xs text-slate-400">Flash and debrand Cyber-shot and Walkman Java series phones (K800, W810, W995, C905)</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 rounded-xl bg-surface-800/80 border border-surface-700">
+              <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-mono font-bold text-[10px] block w-fit mb-2">
+                MAIN (MBN)
+              </span>
+              <h4 className="font-bold text-white text-xs">Main Firmware Binary</h4>
+              <p className="text-[11px] text-slate-400 mt-1">Core operating system software and baseband radio drivers.</p>
+            </div>
+            <div className="p-4 rounded-xl bg-surface-800/80 border border-surface-700">
+              <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-mono font-bold text-[10px] block w-fit mb-2">
+                FS (FBN)
+              </span>
+              <h4 className="font-bold text-white text-xs">File System Image</h4>
+              <p className="text-[11px] text-slate-400 mt-1">Language packs, default Walkman skins, T9 dictionary, and themes.</p>
+            </div>
+            <div className="p-4 rounded-xl bg-surface-800/80 border border-surface-700">
+              <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-mono font-bold text-[10px] block w-fit mb-2">
+                CDA / CUSTOM
+              </span>
+              <h4 className="font-bold text-white text-xs">Customization Pack</h4>
+              <p className="text-[11px] text-slate-400 mt-1">Debrands operator locks and finishes the file system installation.</p>
+            </div>
+          </div>
+
+          <div className="p-5 rounded-xl bg-surface-900/60 border border-surface-750 space-y-3">
+            <h3 className="font-bold text-white text-xs">How to enter Sony Ericsson "C" Key Flash Mode:</h3>
+            <ol className="list-decimal list-inside space-y-1.5 text-xs text-slate-300">
+              <li>Make sure Gordon's Gate USB Flash Driver is installed.</li>
+              <li>Power off the phone and remove battery for 5 seconds, then re-insert battery.</li>
+              <li>Press and hold down the <strong className="text-white">"C" Key</strong> (or keys <strong className="text-white">2 + 5</strong> on slider phones).</li>
+              <li>While holding the key, connect the FastPort / USB cable to PC.</li>
+              <li>The tool (A2 Flashtool / XS++) will detect the phone CID and start flashing.</li>
+            </ol>
+          </div>
+        </div>
+      )}
+
+      {/* Mode Content: 6. Samsung Keypad FlashLoader Guide */}
+      {flashMode === 'guided_samsung_keypad' && (
+        <div className="p-8 rounded-2xl bg-surface-850 border border-surface-750 space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
+              <Smartphone className="w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-white">Samsung Keypad (Java Feature Phone) Flashing</h2>
+              <p className="text-xs text-slate-400">Flash Samsung Guru Music 2, Metro 313, Duos E2252, and C3322 using Flash Loader & SPD Tool</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="p-5 rounded-xl bg-surface-800/80 border border-surface-700 space-y-3">
+              <h4 className="font-bold text-white text-xs">Method A: Spreadtrum SPD Flash Tool (Guru Music / Metro 313)</h4>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                1. Load the <code>.PAC</code> firmware file into SPD Upgrade Tool / ResearchDownload.<br />
+                2. Click the Play / Start button.<br />
+                3. Remove battery from Samsung phone, then re-insert battery.<br />
+                4. Press and hold the <strong className="text-white">Center OK / Home Key</strong>.<br />
+                5. While holding OK, plug in the micro-USB cable. Release when progress bar turns blue.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-xl bg-surface-800/80 border border-surface-700 space-y-3">
+              <h4 className="font-bold text-white text-xs">Method B: Flash Loader 7.4.7 (Duos E2252 / C3322)</h4>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                1. Select Main .PTT file and load <code>.cla</code>, <code>.tfs</code>, and <code>.csc</code> files.<br />
+                2. Click <strong className="text-white">START</strong>.<br />
+                3. Hold down keys <strong className="text-white">1 + 3</strong> or <strong className="text-white">Center OK</strong> while plugging in USB cable without battery, then insert battery.
               </p>
             </div>
           </div>

@@ -212,6 +212,273 @@ const ONEPLUS_REGISTRY = [
   }
 ];
 
+// Nokia Symbian & Series 40 Java Registry
+const NOKIA_REGISTRY = [
+  // --- Symbian Smartphones ---
+  {
+    model: 'Nokia N8-00',
+    code: 'RM-596',
+    brand: 'nokia',
+    platform: 'Symbian^3 / Nokia Belle Refresh',
+    osType: 'Symbian',
+    firmwares: [
+      { version: 'Nokia Belle Refresh (v111.040.1511)', build: '111.040.1511', date: 'Aug 2012', size: '284 MB', region: 'Global / Euro 1', type: 'Complete Flash Pack (MCU, PPM, CNT, APE)', url: 'https://archive.org/download/nokia-firmwares-collection/RM-596_111.040.1511_Euro1.zip', signed: true, components: ['RM-596_111.040.1511_79.92_prd.core.fpsx', 'RM-596_111.040.1511_02.01_Euro1_79.92_prd.rofs2.fpsx', 'RM-596_111.040.1511_C00.01_79.92_prd.rofs3.fpsx', 'RM-596_111.040.1511_U01.01_79.92.uda.fpsx'] },
+      { version: 'Symbian Anna (v025.007)', build: '025.007', date: 'Sep 2011', size: '265 MB', region: 'Global', type: 'Complete Flash Pack (MCU, PPM, CNT)', url: 'https://archive.org/download/nokia-firmwares-collection/RM-596_025.007_Global.zip', signed: true }
+    ]
+  },
+  {
+    model: 'Nokia 808 PureView (41MP)',
+    code: 'RM-807',
+    brand: 'nokia',
+    platform: 'Symbian Belle Feature Pack 2',
+    osType: 'Symbian',
+    firmwares: [
+      { version: 'Nokia Belle FP2 (v113.010.1508)', build: '113.010.1508', date: 'Oct 2012', size: '312 MB', region: 'Global / Euro', type: 'Full Phoenix Flash Pack', url: 'https://archive.org/download/nokia-firmwares-collection/RM-807_113.010.1508_Euro.zip', signed: true }
+    ]
+  },
+  {
+    model: 'Nokia N95 / N95 8GB',
+    code: 'RM-159',
+    brand: 'nokia',
+    platform: 'Symbian OS v9.2, S60 3rd Edition FP1',
+    osType: 'Symbian',
+    firmwares: [
+      { version: 'S60 v35.0.002 Final', build: '35.0.002', date: 'Nov 2009', size: '128 MB', region: 'Euro / APAC', type: 'BB5 Flash Pack (MCU+PPM+CNT)', url: 'https://archive.org/download/nokia-firmwares-collection/RM-159_v35.0.002.zip', signed: true }
+    ]
+  },
+  {
+    model: 'Nokia E71 (QWERTY Classic)',
+    code: 'RM-346',
+    brand: 'nokia',
+    platform: 'Symbian OS v9.2, S60 3rd Edition',
+    osType: 'Symbian',
+    firmwares: [
+      { version: 'S60 v510.21.009 Final', build: '510.21.009', date: 'Dec 2010', size: '142 MB', region: 'Global', type: 'BB5 Flash Pack', url: 'https://archive.org/download/nokia-firmwares-collection/RM-346_v510.21.009.zip', signed: true }
+    ]
+  },
+  {
+    model: 'Nokia 5800 XpressMusic',
+    code: 'RM-356',
+    brand: 'nokia',
+    platform: 'Symbian OS v9.4, S60 5th Edition Touch',
+    osType: 'Symbian',
+    firmwares: [
+      { version: 'S60 5th v60.0.003 Final', build: '60.0.003', date: 'Dec 2011', size: '165 MB', region: 'Global', type: 'Touchscreen BB5 Flash Pack', url: 'https://archive.org/download/nokia-firmwares-collection/RM-356_v60.0.003.zip', signed: true }
+    ]
+  },
+  {
+    model: 'Nokia N97 / N97 Mini',
+    code: 'RM-505',
+    brand: 'nokia',
+    platform: 'Symbian OS v9.4, S60 5th Edition',
+    osType: 'Symbian',
+    firmwares: [
+      { version: 'S60 5th v22.0.110 Final', build: '22.0.110', date: 'Jun 2010', size: '185 MB', region: 'Global', type: 'BB5 Flash Pack', url: 'https://archive.org/download/nokia-firmwares-collection/RM-505_v22.0.110.zip', signed: true }
+    ]
+  },
+  {
+    model: 'Nokia E72',
+    code: 'RM-530',
+    brand: 'nokia',
+    platform: 'Symbian OS v9.3, S60 3rd Edition FP2',
+    osType: 'Symbian',
+    firmwares: [
+      { version: 'S60 v091.004 Final', build: '091.004', date: 'Jan 2012', size: '155 MB', region: 'Global', type: 'BB5 Flash Pack', url: 'https://archive.org/download/nokia-firmwares-collection/RM-530_v091.004.zip', signed: true }
+    ]
+  },
+  {
+    model: 'Nokia C7-00',
+    code: 'RM-675',
+    brand: 'nokia',
+    platform: 'Symbian^3 / Nokia Belle Refresh',
+    osType: 'Symbian',
+    firmwares: [
+      { version: 'Nokia Belle Refresh (v111.040.1511)', build: '111.040.1511', date: 'Aug 2012', size: '275 MB', region: 'Global', type: 'Complete Flash Pack', url: 'https://archive.org/download/nokia-firmwares-collection/RM-675_111.040.1511.zip', signed: true }
+    ]
+  },
+  {
+    model: 'Nokia E7-00 (Slider QWERTY)',
+    code: 'RM-626',
+    brand: 'nokia',
+    platform: 'Symbian^3 / Nokia Belle Refresh',
+    osType: 'Symbian',
+    firmwares: [
+      { version: 'Nokia Belle Refresh (v111.040.1511)', build: '111.040.1511', date: 'Aug 2012', size: '290 MB', region: 'Global', type: 'Complete Flash Pack', url: 'https://archive.org/download/nokia-firmwares-collection/RM-626_111.040.1511.zip', signed: true }
+    ]
+  },
+
+  // --- Series 40 Java (J2ME) Phones ---
+  {
+    model: 'Nokia 6300 (Classic Steel)',
+    code: 'RM-217',
+    brand: 'nokia',
+    platform: 'Series 40 3rd Edition, Java MIDP 2.0',
+    osType: 'Java (S40)',
+    firmwares: [
+      { version: 'S40 v07.30 Final (Java J2ME)', build: '07.30', date: 'Dec 2009', size: '48 MB', region: 'Global / APAC', type: 'S40 Full Flash (MCU+PPM+CNT)', url: 'https://archive.org/download/nokia-firmwares-collection/RM-217_v07.30.zip', signed: true },
+      { version: 'S40 v07.21', build: '07.21', date: 'Jun 2009', size: '46 MB', region: 'Global', type: 'S40 Flash (MCU+PPM+CNT)', url: 'https://archive.org/download/nokia-firmwares-collection/RM-217_v07.21.zip', signed: true }
+    ]
+  },
+  {
+    model: 'Nokia 5310 XpressMusic',
+    code: 'RM-303',
+    brand: 'nokia',
+    platform: 'Series 40 5th Edition, Java J2ME',
+    osType: 'Java (S40)',
+    firmwares: [
+      { version: 'S40 v10.10 Final (Java J2ME)', build: '10.10', date: 'Feb 2010', size: '52 MB', region: 'Global', type: 'S40 Full Flash Pack', url: 'https://archive.org/download/nokia-firmwares-collection/RM-303_v10.10.zip', signed: true }
+    ]
+  },
+  {
+    model: 'Nokia 2700 Classic',
+    code: 'RM-561',
+    brand: 'nokia',
+    platform: 'Series 40 5th Edition, Java J2ME',
+    osType: 'Java (S40)',
+    firmwares: [
+      { version: 'S40 v09.98 Final (Java J2ME)', build: '09.98', date: 'Aug 2011', size: '55 MB', region: 'Global / Euro / Asia', type: 'S40 Full Flash Pack', url: 'https://archive.org/download/nokia-firmwares-collection/RM-561_v09.98.zip', signed: true }
+    ]
+  },
+  {
+    model: 'Nokia C2-01 (3G Classic)',
+    code: 'RM-721',
+    brand: 'nokia',
+    platform: 'Series 40 6th Edition, Java J2ME',
+    osType: 'Java (S40)',
+    firmwares: [
+      { version: 'S40 v11.40 Final (Java J2ME)', build: '11.40', date: 'Jan 2012', size: '58 MB', region: 'Global', type: 'S40 Full Flash Pack', url: 'https://archive.org/download/nokia-firmwares-collection/RM-721_v11.40.zip', signed: true }
+    ]
+  },
+  {
+    model: 'Nokia Asha 311 (Touch Java)',
+    code: 'RM-714',
+    brand: 'nokia',
+    platform: 'Series 40 Asha Touch, Java J2ME 1GHz',
+    osType: 'Java (Asha)',
+    firmwares: [
+      { version: 'Asha Touch v07.36 Final', build: '07.36', date: 'Feb 2013', size: '92 MB', region: 'Global', type: 'Full Phoenix / BEST Flash Pack', url: 'https://archive.org/download/nokia-firmwares-collection/RM-714_v07.36.zip', signed: true }
+    ]
+  },
+  {
+    model: 'Nokia 3310 (Reborn 2017)',
+    code: 'TA-1030',
+    brand: 'nokia',
+    platform: 'Nokia Smart Feature OS, Java MIDP 2.1',
+    osType: 'Java (Feature)',
+    firmwares: [
+      { version: 'Smart Feature OS v16.00.17', build: '16.00.17', date: '2018', size: '64 MB', region: 'Global / Dual SIM', type: 'Mediatek MT6260 Flash Pack (PAC/BIN)', url: 'https://archive.org/download/nokia-firmwares-collection/TA-1030_v16.00.17.zip', signed: true }
+    ]
+  }
+];
+
+// Sony Ericsson Java (A2 Platform) & UIQ Symbian Registry
+const SONY_ERICSSON_REGISTRY = [
+  {
+    model: 'Sony Ericsson K800i Cyber-shot',
+    code: 'K800i',
+    brand: 'sonyericsson',
+    platform: 'A200 Java Platform (DB2020)',
+    osType: 'Java (SE)',
+    firmwares: [
+      { version: 'K800 R8BF003 Generic (CID52/53)', build: 'R8BF003', date: '2007', size: '68 MB', region: 'Europe / APAC', type: 'MAIN + FS + Customization CDA', url: 'https://archive.org/download/sony-ericsson-firmware-archive/K800_R8BF003_MAIN_FS_CDA.zip', signed: true, components: ['K800_R8BF003_MAIN_GENERIC_WI_RED52.mbn', 'K800_R8BF003_FS_EUROPE_2_RED52.fbn', 'Custom_CDA102568_102.zip'] }
+    ]
+  },
+  {
+    model: 'Sony Ericsson W810i Walkman',
+    code: 'W810i',
+    brand: 'sonyericsson',
+    platform: 'DB2010 Java Platform (Walkman 2.0)',
+    osType: 'Java (SE)',
+    firmwares: [
+      { version: 'W810 R4EA031 Generic (CID49)', build: 'R4EA031', date: '2006', size: '54 MB', region: 'Europe / America', type: 'MAIN + FS + CDA', url: 'https://archive.org/download/sony-ericsson-firmware-archive/W810_R4EA031_MAIN_FS.zip', signed: true }
+    ]
+  },
+  {
+    model: 'Sony Ericsson W995 Walkman 8MP',
+    code: 'W995',
+    brand: 'sonyericsson',
+    platform: 'A200 DB3210 Java Walkman',
+    osType: 'Java (SE)',
+    firmwares: [
+      { version: 'W995 R1HA035 Generic Final', build: 'R1HA035', date: '2010', size: '98 MB', region: 'Global', type: 'A2 Flashtool Firmware Package', url: 'https://archive.org/download/sony-ericsson-firmware-archive/W995_R1HA035_Generic.zip', signed: true }
+    ]
+  },
+  {
+    model: 'Sony Ericsson C905 Cyber-shot 8MP',
+    code: 'C905',
+    brand: 'sonyericsson',
+    platform: 'A200 DB3210 Java Cyber-shot',
+    osType: 'Java (SE)',
+    firmwares: [
+      { version: 'C905 R1FA035 Generic Final', build: 'R1FA035', date: '2009', size: '95 MB', region: 'Global', type: 'A2 Flashtool Firmware Package', url: 'https://archive.org/download/sony-ericsson-firmware-archive/C905_R1FA035_Generic.zip', signed: true }
+    ]
+  },
+  {
+    model: 'Sony Ericsson P990i (UIQ Symbian)',
+    code: 'P990i',
+    brand: 'sonyericsson',
+    platform: 'Symbian OS v9.1, UIQ 3.0',
+    osType: 'Symbian (UIQ)',
+    firmwares: [
+      { version: 'P990i R9G007 World 1 Final', build: 'R9G007', date: '2007', size: '120 MB', region: 'Global', type: 'Symbian UIQ Flash Package (CXC)', url: 'https://archive.org/download/sony-ericsson-firmware-archive/P990i_R9G007_World1.zip', signed: true }
+    ]
+  },
+  {
+    model: 'Sony Ericsson Vivaz (U5i) / Satio (U1)',
+    code: 'U5i',
+    brand: 'sonyericsson',
+    platform: 'Symbian OS S60 5th Edition 720p HD',
+    osType: 'Symbian (S60)',
+    firmwares: [
+      { version: 'Vivaz R2CA024 Generic Final', build: 'R2CA024', date: '2010', size: '168 MB', region: 'Global', type: 'Omnius / SE Flashtool Pack', url: 'https://archive.org/download/sony-ericsson-firmware-archive/U5i_Vivaz_R2CA024.zip', signed: true }
+    ]
+  }
+];
+
+// Samsung Keypad / Java Feature Phone Registry
+const SAMSUNG_FEATURE_REGISTRY = [
+  {
+    model: 'Samsung Guru Music 2',
+    code: 'SM-B310E',
+    brand: 'samsung_feature',
+    platform: 'Spreadtrum SC6531 Java Feature Phone',
+    osType: 'Java (Samsung)',
+    firmwares: [
+      { version: 'B310EODDNH1 Stock Flash File', build: 'B310EODDNH1', date: '2015', size: '18 MB', region: 'INS (India)', type: 'Stock PAC / FlashLoader 7.4.7', url: 'https://samfw.com/firmware/SM-B310E/INS/B310EODDNH1', signed: true, components: ['NOR_FLASH_IMAGE.bin', 'DSP_IMAGE.bin', 'USER_DISK.bin'] }
+    ]
+  },
+  {
+    model: 'Samsung Metro 313 (Dual SIM)',
+    code: 'SM-B313E',
+    brand: 'samsung_feature',
+    platform: 'Spreadtrum SC6530 Java Platform',
+    osType: 'Java (Samsung)',
+    firmwares: [
+      { version: 'B313EXXU0AOG1 Stock Flash File', build: 'B313EXXU0AOG1', date: '2015', size: '21 MB', region: 'Global / India', type: 'Stock PAC / SPD Upgrade Tool File', url: 'https://samfw.com/firmware/SM-B313E/INS/B313EXXU0AOG1', signed: true }
+    ]
+  },
+  {
+    model: 'Samsung Metro 350',
+    code: 'SM-B350E',
+    brand: 'samsung_feature',
+    platform: 'Spreadtrum SC6531 Java Platform',
+    osType: 'Java (Samsung)',
+    firmwares: [
+      { version: 'B350EXXU0AOH1 Stock Flash File', build: 'B350EXXU0AOH1', date: '2015', size: '24 MB', region: 'Global', type: 'Stock PAC / SPD Flash File', url: 'https://samfw.com/firmware/SM-B350E/INS/B350EXXU0AOH1', signed: true }
+    ]
+  },
+  {
+    model: 'Samsung Duos GT-E2252 / GT-C3322',
+    code: 'GT-E2252',
+    brand: 'samsung_feature',
+    platform: 'Samsung Swift Java J2ME Platform',
+    osType: 'Java (Samsung)',
+    firmwares: [
+      { version: 'E2252DDLG1 Stock Firmware', build: 'E2252DDLG1', date: '2013', size: '32 MB', region: 'INS / Asia', type: 'Flash Loader Multi-File (CLA, TFS, CSC)', url: 'https://samfw.com/firmware/GT-E2252/INS/E2252DDLG1', signed: true, components: ['E2252DDLG1.cla', 'E2252DDLG1.tfs', 'E2252ODDLG1.csc'] }
+    ]
+  }
+];
+
 class FirmwareService {
   constructor() {
     this.appleDevicesCache = null;
@@ -346,6 +613,12 @@ class FirmwareService {
         return XIAOMI_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'xiaomi' }));
       case 'oneplus':
         return ONEPLUS_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'oneplus' }));
+      case 'nokia':
+        return NOKIA_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'nokia', platform: d.platform, osType: d.osType }));
+      case 'sonyericsson':
+        return SONY_ERICSSON_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'sonyericsson', platform: d.platform, osType: d.osType }));
+      case 'samsung_feature':
+        return SAMSUNG_FEATURE_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'samsung_feature', platform: d.platform, osType: d.osType }));
       default:
         return [];
     }
@@ -365,6 +638,12 @@ class FirmwareService {
         return XIAOMI_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
       case 'oneplus':
         return ONEPLUS_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+      case 'nokia':
+        return NOKIA_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+      case 'sonyericsson':
+        return SONY_ERICSSON_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+      case 'samsung_feature':
+        return SAMSUNG_FEATURE_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
       default:
         return null;
     }

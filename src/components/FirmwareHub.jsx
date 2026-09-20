@@ -32,6 +32,9 @@ export default function FirmwareHub({ onStartDownload, onPrepareFlash }) {
     { id: 'google', name: 'Google Pixel', logo: 'G' },
     { id: 'xiaomi', name: 'Xiaomi / POCO', logo: 'Mi' },
     { id: 'oneplus', name: 'OnePlus', logo: '1+' },
+    { id: 'nokia', name: 'Nokia (Symbian & Java)', logo: 'N' },
+    { id: 'sonyericsson', name: 'Sony Ericsson (Java)', logo: 'SE' },
+    { id: 'samsung_feature', name: 'Samsung Keypad (Java)', logo: '123' },
   ];
 
   // Fetch models whenever brand changes
@@ -159,7 +162,14 @@ export default function FirmwareHub({ onStartDownload, onPrepareFlash }) {
                 >
                   <div className="truncate pr-2">
                     <p className="font-semibold text-xs truncate">{m.model}</p>
-                    <p className="text-[10px] text-slate-400 font-mono mt-0.5">{m.code}</p>
+                    <div className="flex items-center gap-1.5 mt-0.5">
+                      <span className="text-[10px] text-slate-400 font-mono">{m.code}</span>
+                      {m.osType && (
+                        <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-surface-750 text-indigo-300">
+                          {m.osType}
+                        </span>
+                      )}
+                    </div>
                   </div>
                   {isSelected && (
                     <span className="w-2 h-2 rounded-full bg-brand-400 shrink-0" />
@@ -303,6 +313,22 @@ export default function FirmwareHub({ onStartDownload, onPrepareFlash }) {
                         <span className="truncate text-slate-300">
                           {fw.sha256 ? `SHA256: ${fw.sha256}` : fw.sha1 ? `SHA1: ${fw.sha1}` : `MD5: ${fw.md5}`}
                         </span>
+                      </div>
+                    )}
+
+                    {/* Multi-component Flash Package Files (Symbian / Java / Odin) */}
+                    {fw.components && (
+                      <div className="p-2.5 rounded-xl bg-surface-900/60 border border-surface-800 space-y-1.5 text-[11px] font-mono">
+                        <span className="text-slate-400 font-bold block text-[10px] uppercase tracking-wider">
+                          Package Components (MCU / PPM / CNT / APE):
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {fw.components.map((comp, cIdx) => (
+                            <span key={cIdx} className="px-2 py-0.5 rounded bg-surface-800 text-brand-300 border border-surface-700 text-[10px]">
+                              {comp}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     )}
                   </div>
