@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Runtime and platform binaries
+.runtime/
+bin/platform-tools/
+
+# Downloaded firmwares & ROM files
+downloads/
+
+# Build outputs
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# OS files
+Thumbs.db
+.DS_Store
