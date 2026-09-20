@@ -29,9 +29,10 @@ export default function FirmwareHub({ onStartDownload, onPrepareFlash }) {
 
   const brands = [
     { id: 'apple', name: 'Apple iOS / iPad', logo: '' },
+    { id: 'redmi', name: 'Redmi Series', logo: 'Redmi' },
+    { id: 'xiaomi', name: 'Xiaomi / POCO', logo: 'Mi' },
     { id: 'samsung', name: 'Samsung Galaxy', logo: 'S' },
     { id: 'google', name: 'Google Pixel', logo: 'G' },
-    { id: 'xiaomi', name: 'Xiaomi / POCO', logo: 'Mi' },
     { id: 'oneplus', name: 'OnePlus', logo: '1+' },
     { id: 'nokia', name: 'Nokia (Symbian & Java)', logo: 'N' },
     { id: 'sonyericsson', name: 'Sony Ericsson (Java)', logo: 'SE' },
@@ -267,8 +268,18 @@ export default function FirmwareHub({ onStartDownload, onPrepareFlash }) {
                 >
                   <div className="truncate pr-2">
                     <p className="font-semibold text-xs truncate">{m.model}</p>
-                    <div className="flex items-center gap-1.5 mt-0.5">
+                    <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
                       <span className="text-[10px] text-slate-400 font-mono">{m.code}</span>
+                      {m.series && (
+                        <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20">
+                          {m.series}
+                        </span>
+                      )}
+                      {m.chipset && (
+                        <span className="text-[9px] px-1.5 py-0.2 rounded bg-surface-750 text-slate-400">
+                          {m.chipset}
+                        </span>
+                      )}
                       {m.osType && (
                         <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-surface-750 text-indigo-300">
                           {m.osType}

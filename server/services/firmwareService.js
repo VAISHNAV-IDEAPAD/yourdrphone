@@ -141,49 +141,8 @@ const SAMSUNG_REGISTRY = [
 ];
 
 // Xiaomi / POCO / Redmi Registry
-const XIAOMI_REGISTRY = [
-  {
-    model: 'Xiaomi 14 Ultra',
-    code: 'aurora',
-    brand: 'xiaomi',
-    firmwares: [
-      { version: 'HyperOS 1.0 (OS1.0.12.0.UNAMIXM)', build: 'OS1.0.12.0.UNAMIXM', date: 'Aug 2024', size: '7.8 GB', region: 'Global', type: 'Fastboot ROM (tgz)', url: 'https://bigota.d.miui.com/OS1.0.12.0.UNAMIXM/aurora_global_images_OS1.0.12.0.UNAMIXM_20240810.0000.00_14.0_glo_281290bbfa.tgz', signed: true },
-      { version: 'HyperOS 1.0 Recovery (OS1.0.12.0.UNAMIXM)', build: 'OS1.0.12.0.UNAMIXM', date: 'Aug 2024', size: '6.4 GB', region: 'Global', type: 'Recovery ROM (zip)', url: 'https://bigota.d.miui.com/OS1.0.12.0.UNAMIXM/miui_AURORAGlobal_OS1.0.12.0.UNAMIXM_65f048d0a8_14.0.zip', signed: true }
-    ]
-  },
-  {
-    model: 'Xiaomi 14',
-    code: 'houji',
-    brand: 'xiaomi',
-    firmwares: [
-      { version: 'HyperOS 1.0 (OS1.0.18.0.UNCMIXM)', build: 'OS1.0.18.0.UNCMIXM', date: 'Sep 2024', size: '7.5 GB', region: 'Global', type: 'Fastboot ROM (tgz)', url: 'https://bigota.d.miui.com/OS1.0.18.0.UNCMIXM/houji_global_images_OS1.0.18.0.UNCMIXM_20240902.0000.00_14.0_glo_74c5d809ec.tgz', signed: true }
-    ]
-  },
-  {
-    model: 'POCO F6 Pro / Redmi K70',
-    code: 'vermeer',
-    brand: 'xiaomi',
-    firmwares: [
-      { version: 'HyperOS 1.0 (OS1.0.8.0.UNBMIXM)', build: 'OS1.0.8.0.UNBMIXM', date: 'Jul 2024', size: '7.2 GB', region: 'Global', type: 'Fastboot ROM (tgz)', url: 'https://bigota.d.miui.com/OS1.0.8.0.UNBMIXM/vermeer_global_images_OS1.0.8.0.UNBMIXM_20240722.0000.00_14.0_glo_b8ff7930db.tgz', signed: true }
-    ]
-  },
-  {
-    model: 'POCO X6 Pro 5G',
-    code: 'duchamp',
-    brand: 'xiaomi',
-    firmwares: [
-      { version: 'HyperOS 1.0 (OS1.0.11.0.UNLMIXM)', build: 'OS1.0.11.0.UNLMIXM', date: 'Aug 2024', size: '6.9 GB', region: 'Global', type: 'Fastboot ROM (tgz)', url: 'https://bigota.d.miui.com/OS1.0.11.0.UNLMIXM/duchamp_global_images_OS1.0.11.0.UNLMIXM_20240815.0000.00_14.0_glo_5a246efb70.tgz', signed: true }
-    ]
-  },
-  {
-    model: 'Redmi Note 13 Pro+ 5G',
-    code: 'zircon',
-    brand: 'xiaomi',
-    firmwares: [
-      { version: 'HyperOS 1.0 (OS1.0.6.0.UNOMIXM)', build: 'OS1.0.6.0.UNOMIXM', date: 'May 2024', size: '6.7 GB', region: 'Global', type: 'Fastboot ROM (tgz)', url: 'https://bigota.d.miui.com/OS1.0.6.0.UNOMIXM/zircon_global_images_OS1.0.6.0.UNOMIXM_20240520.0000.00_14.0_glo_d9a19c6239.tgz', signed: true }
-    ]
-  }
-];
+const { REDMI_AND_XIAOMI_REGISTRY } = require('./redmiRegistry');
+const XIAOMI_REGISTRY = REDMI_AND_XIAOMI_REGISTRY;
 
 // OnePlus Registry
 const ONEPLUS_REGISTRY = [
@@ -647,8 +606,13 @@ class FirmwareService {
         return SAMSUNG_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'samsung', regions: d.regions }));
       case 'google':
         return PIXEL_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'google' }));
+      case 'redmi':
+        return REDMI_AND_XIAOMI_REGISTRY
+          .filter(d => d.brand === 'redmi' || d.model.toLowerCase().includes('redmi'))
+          .map(d => ({ model: d.model, code: d.code, brand: 'redmi', series: d.series, chipset: d.chipset }));
       case 'xiaomi':
-        return XIAOMI_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'xiaomi' }));
+      case 'poco':
+        return REDMI_AND_XIAOMI_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: d.brand, series: d.series, chipset: d.chipset }));
       case 'oneplus':
         return ONEPLUS_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'oneplus' }));
       case 'nokia':
@@ -672,8 +636,10 @@ class FirmwareService {
         return SAMSUNG_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
       case 'google':
         return PIXEL_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+      case 'redmi':
       case 'xiaomi':
-        return XIAOMI_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+      case 'poco':
+        return REDMI_AND_XIAOMI_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
       case 'oneplus':
         return ONEPLUS_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
       case 'nokia':

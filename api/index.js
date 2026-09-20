@@ -12,10 +12,10 @@ app.get('/api/firmware/brands', (req, res) => {
   res.json({
     success: true,
     brands: [
-      { id: 'apple', name: 'Apple (iPhone & iPad)', icon: 'Apple', count: '100+ Models' },
+      { id: 'apple', name: 'Apple (iPhone & iPad)', icon: 'Apple', count: '170+ Models' },
+      { id: 'redmi', name: 'Redmi Series (Note / K / A)', icon: 'Cpu', count: '50+ Models (HyperOS & Fastboot)' },
+      { id: 'xiaomi', name: 'Xiaomi & POCO', icon: 'Cpu', count: 'HyperOS & Fastboot ROMs' },
       { id: 'samsung', name: 'Samsung Galaxy', icon: 'Smartphone', count: 'Multi-CSC Stock ROMs' },
-      { id: 'google', name: 'Google Pixel', icon: 'Globe', count: 'Official Factory Images' },
-      { id: 'xiaomi', name: 'Xiaomi / Redmi / POCO', icon: 'Cpu', count: 'HyperOS & Fastboot ROMs' },
       { id: 'oneplus', name: 'OnePlus', icon: 'Zap', count: 'OxygenOS Stock Packages' },
       { id: 'nokia', name: 'Nokia (Symbian & S40 Java)', icon: 'Radio', count: 'S60 / Symbian^3 / S40' },
       { id: 'sonyericsson', name: 'Sony Ericsson (Java & UIQ)', icon: 'Disc', count: 'Walkman / Cyber-shot / A2' },
