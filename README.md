@@ -1,5 +1,9 @@
-# Dr.Firmware - Universal Mobile Repair & Firmware Flashing Suite
-*A comprehensive, modern desktop alternative to Wondershare Dr.Fone*
+# Dr.Firmware (YourDrPhone) - Universal Mobile Repair & Firmware Flashing Suite
+*A comprehensive, modern alternative to Wondershare Dr.Fone*
+
+- 🌐 **GitHub Repository**: [https://github.com/VAISHNAV-IDEAPAD/yourdrphone](https://github.com/VAISHNAV-IDEAPAD/yourdrphone)
+- ⚡ **Vercel Deploy Link**: [Deploy yourdrphone on Vercel](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FVAISHNAV-IDEAPAD%2Fyourdrphone&project-name=yourdrphone)
+- 🚀 **Production URL**: `https://yourdrphone.vercel.app`
 
 Dr.Firmware is an all-in-one desktop application for Windows engineered for mobile technicians, repair shops, and enthusiasts. It provides an automated stock firmware catalog, multi-threaded high-speed downloads, live hardware diagnostics via ADB/Fastboot, and a guided flashing engine for Apple iOS, Samsung, Google Pixel, Xiaomi, and OnePlus.
 
