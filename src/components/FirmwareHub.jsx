@@ -25,6 +25,7 @@ export default function FirmwareHub({ onStartDownload, onPrepareFlash }) {
   const [loadingModels, setLoadingModels] = useState(false);
   const [loadingFirmwares, setLoadingFirmwares] = useState(false);
   const [copiedUrl, setCopiedUrl] = useState(null);
+  const [onlySigned, setOnlySigned] = useState(false);
 
   const brands = [
     { id: 'apple', name: 'Apple iOS / iPad', logo: '' },
@@ -46,13 +47,60 @@ export default function FirmwareHub({ onStartDownload, onPrepareFlash }) {
     setLoadingModels(true);
     setSelectedModel(null);
     setFirmwaresData(null);
+
+    // Direct client fetch for Apple devices for 100% reliability on Vercel & Web
+    if (brand === 'apple') {
+      try {
+        let list = null;
+        try {
+          const controller = new AbortController();
+          const tId = setTimeout(() => controller.abort(), 3500);
+          const res = await fetch('/api/firmware/apple/models', { signal: controller.signal });
+          clearTimeout(tId);
+          const data = await res.json();
+          if (data.success && data.models && data.models.length > 0) {
+            list = data.models;
+          }
+        } catch (e) {}
+
+        // If local API didn't return, directly fetch official open IPSW API in browser
+        if (!list || list.length === 0) {
+          const directRes = await fetch('https://api.ipsw.me/v4/devices');
+          const allDevs = await directRes.json();
+          list = allDevs
+            .filter(d => d.identifier && (d.identifier.startsWith('iPhone') || d.identifier.startsWith('iPad')))
+            .map(d => ({
+              model: d.name,
+              code: d.identifier,
+              brand: 'apple',
+              type: d.identifier.startsWith('iPhone') ? 'iPhone' : 'iPad'
+            }))
+            .sort((a, b) => {
+              if (a.type !== b.type) return a.type === 'iPhone' ? -1 : 1;
+              const numA = parseFloat((a.code.match(/\d+[\.,]?\d*/)?.[0] || '0').replace(',', '.'));
+              const numB = parseFloat((b.code.match(/\d+[\.,]?\d*/)?.[0] || '0').replace(',', '.'));
+              if (numA !== numB) return numB - numA;
+              return a.model.localeCompare(b.model);
+            });
+        }
+
+        if (list && list.length > 0) {
+          setModels(list);
+          selectModel('apple', list[0].code);
+          setLoadingModels(false);
+          return;
+        }
+      } catch (err) {
+        console.warn('Direct Apple fetch failed, using fallback list:', err);
+      }
+    }
+
     try {
       const res = await fetch(`/api/firmware/${brand}/models`);
       const data = await res.json();
       if (data.success) {
         setModels(data.models || []);
         if (data.models && data.models.length > 0) {
-          // Auto-select first model
           selectModel(brand, data.models[0].code);
         }
       }
@@ -66,6 +114,63 @@ export default function FirmwareHub({ onStartDownload, onPrepareFlash }) {
   const selectModel = async (brand, code) => {
     setSelectedModel(code);
     setLoadingFirmwares(true);
+
+    // Direct client fetch for Apple firmwares for zero latency and real-time iOS updates
+    if (brand === 'apple') {
+      let loaded = false;
+      try {
+        const controller = new AbortController();
+        const tId = setTimeout(() => controller.abort(), 3500);
+        const res = await fetch(`/api/firmware/apple/${code}`, { signal: controller.signal });
+        clearTimeout(tId);
+        const data = await res.json();
+        if (data.success && data.data && data.data.firmwares && data.data.firmwares.length > 0) {
+          setFirmwaresData(data.data);
+          loaded = true;
+        }
+      } catch (e) {}
+
+      if (!loaded) {
+        try {
+          const directRes = await fetch(`https://api.ipsw.me/v4/device/${code}`);
+          const ipswData = await directRes.json();
+          const firmwares = (ipswData.firmwares || []).map(f => {
+            const sizeGB = (f.filesize / (1024 * 1024 * 1024)).toFixed(2);
+            return {
+              version: `iOS ${f.version} (${f.buildid})`,
+              rawVersion: f.version,
+              build: f.buildid,
+              date: f.releasedate ? f.releasedate.split('T')[0] : 'Official Apple',
+              size: `${sizeGB} GB`,
+              filesizeBytes: f.filesize,
+              url: f.url,
+              sha1: f.sha1sum,
+              sha256: f.sha256sum,
+              md5: f.md5sum,
+              signed: f.signed,
+              type: f.signed ? 'Official Apple Signed (Restorable)' : 'Official Apple Unsigned'
+            };
+          }).sort((a, b) => (b.signed === a.signed ? 0 : b.signed ? 1 : -1));
+
+          setFirmwaresData({
+            model: ipswData.name || code,
+            code,
+            brand: 'apple',
+            boardConfig: ipswData.boardconfig,
+            firmwares
+          });
+          loaded = true;
+        } catch (err) {
+          console.warn('Direct IPSW query error:', err);
+        }
+      }
+
+      if (loaded) {
+        setLoadingFirmwares(false);
+        return;
+      }
+    }
+
     try {
       const res = await fetch(`/api/firmware/${brand}/${code}`);
       const data = await res.json();
@@ -210,15 +315,33 @@ export default function FirmwareHub({ onStartDownload, onPrepareFlash }) {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="px-3 py-1 rounded-xl bg-surface-800 border border-surface-700 text-xs text-slate-300 font-medium">
-                    {firmwaresData.firmwares ? `${firmwaresData.firmwares.length} Versions Found` : 'Ready'}
+                  {selectedBrand === 'apple' && (
+                    <button
+                      onClick={() => setOnlySigned(!onlySigned)}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 border ${
+                        onlySigned
+                          ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/50'
+                          : 'bg-surface-800 text-slate-400 border-surface-700 hover:text-white'
+                      }`}
+                    >
+                      <CheckCircle2 className="w-3.5 h-3.5" />
+                      {onlySigned ? 'Showing Signed Only' : 'Filter Signed Only'}
+                    </button>
+                  )}
+                  <span className="px-3 py-1.5 rounded-xl bg-surface-800 border border-surface-700 text-xs text-slate-300 font-medium">
+                    {firmwaresData.firmwares
+                      ? `${(onlySigned ? firmwaresData.firmwares.filter(f => f.signed) : firmwaresData.firmwares).length} Versions`
+                      : 'Ready'}
                   </span>
                 </div>
               </div>
 
               {/* Firmware Items List */}
               <div className="space-y-3">
-                {firmwaresData.firmwares && firmwaresData.firmwares.map((fw, idx) => (
+                {firmwaresData.firmwares &&
+                  firmwaresData.firmwares
+                    .filter((fw) => !onlySigned || fw.signed)
+                    .map((fw, idx) => (
                   <div
                     key={idx}
                     className="p-5 rounded-2xl bg-surface-850 border border-surface-750 hover:border-surface-600 transition space-y-4"

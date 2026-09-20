@@ -6,6 +6,7 @@
   "scripts": {
     "server": "node server/server.js",
     "dev:ui": "vite",
+    "build": "vite build",
     "build:ui": "vite build",
     "start": "node server/server.js"
   },
