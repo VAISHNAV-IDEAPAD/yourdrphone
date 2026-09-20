@@ -171,18 +171,50 @@ export default function App() {
 
   // Actions
   const handleStartDownload = async (fw) => {
-    try {
-      const res = await fetch('/api/downloads/start', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(fw)
-      });
-      const data = await res.json();
-      if (data.success) {
-        setActiveTab('downloads');
-      }
-    } catch (err) {
-      alert('Failed to start download: ' + err.message);
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+    if (isLocal) {
+      try {
+        const res = await fetch('/api/downloads/start', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(fw)
+        });
+        const data = await res.json();
+        if (data.success) {
+          setActiveTab('downloads');
+          return;
+        }
+      } catch (err) {}
+    }
+
+    // Direct Web / Cloud Download for Vercel
+    if (fw.url) {
+      const a = document.createElement('a');
+      a.href = fw.url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.download = fw.filename || `${fw.brand}_${fw.model}_firmware`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      setDownloads((prev) => [
+        {
+          id: 'web_' + Date.now(),
+          filename: fw.filename || `${fw.model} Firmware`,
+          model: fw.model,
+          brand: fw.brand,
+          version: fw.version,
+          progress: 100,
+          speed: 'Official Server CDN',
+          eta: 'Browser Downloads',
+          status: 'completed',
+          filePath: 'Saved to your PC Downloads folder'
+        },
+        ...prev
+      ]);
+      setActiveTab('downloads');
     }
   };
 
