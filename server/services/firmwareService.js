@@ -147,6 +147,18 @@ const XIAOMI_REGISTRY = REDMI_AND_XIAOMI_REGISTRY;
 // Honor Registry
 const { HONOR_REGISTRY } = require('./honorRegistry');
 
+// Motorola Registry
+const { MOTOROLA_REGISTRY } = require('./motorolaRegistry');
+
+// HTC Registry
+const { HTC_REGISTRY } = require('./htcRegistry');
+
+// Vivo & iQOO Registry
+const { VIVO_REGISTRY } = require('./vivoRegistry');
+
+// Oppo & Realme Registry
+const { OPPO_REGISTRY } = require('./oppoRegistry');
+
 // OnePlus Registry
 const ONEPLUS_REGISTRY = [
   {
@@ -618,6 +630,17 @@ class FirmwareService {
         return REDMI_AND_XIAOMI_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: d.brand, series: d.series, chipset: d.chipset }));
       case 'honor':
         return HONOR_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'honor', series: d.series, chipset: d.chipset }));
+      case 'motorola':
+      case 'moto':
+        return MOTOROLA_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'motorola', series: d.series, chipset: d.chipset }));
+      case 'htc':
+        return HTC_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'htc', series: d.series, chipset: d.chipset }));
+      case 'vivo':
+      case 'iqoo':
+        return VIVO_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'vivo', series: d.series, chipset: d.chipset }));
+      case 'oppo':
+      case 'realme':
+        return OPPO_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'oppo', series: d.series, chipset: d.chipset }));
       case 'oneplus':
         return ONEPLUS_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'oneplus' }));
       case 'nokia':
@@ -647,6 +670,17 @@ class FirmwareService {
         return REDMI_AND_XIAOMI_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
       case 'honor':
         return HONOR_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+      case 'motorola':
+      case 'moto':
+        return MOTOROLA_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+      case 'htc':
+        return HTC_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+      case 'vivo':
+      case 'iqoo':
+        return VIVO_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+      case 'oppo':
+      case 'realme':
+        return OPPO_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
       case 'oneplus':
         return ONEPLUS_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
       case 'nokia':

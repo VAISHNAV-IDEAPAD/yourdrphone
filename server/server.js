@@ -92,11 +92,15 @@ app.get('/api/firmware/brands', (req, res) => {
     brands: [
       { id: 'apple', name: 'Apple (iPhone & iPad)', icon: 'Apple', count: '170+ Models' },
       { id: 'honor', name: 'Honor (Magic / Number / X)', icon: 'Smartphone', count: 'MagicOS & dload Service ROMs' },
+      { id: 'motorola', name: 'Motorola (Edge / Razr / Moto G)', icon: 'Radio', count: 'Hello UI & Fastboot XML' },
+      { id: 'vivo', name: 'Vivo & iQOO', icon: 'Smartphone', count: 'Funtouch OS & Fastboot ROMs' },
+      { id: 'oppo', name: 'Oppo & Realme', icon: 'Zap', count: 'ColorOS / Realme UI OFP' },
       { id: 'redmi', name: 'Redmi Series (Note / K / A)', icon: 'Cpu', count: '60+ Models (HyperOS & Fastboot)' },
       { id: 'xiaomi', name: 'Xiaomi & POCO', icon: 'Cpu', count: 'HyperOS & Fastboot ROMs' },
       { id: 'samsung', name: 'Samsung Galaxy', icon: 'Smartphone', count: 'Multi-CSC Stock ROMs' },
       { id: 'google', name: 'Google Pixel', icon: 'Globe', count: 'Official Factory Images' },
       { id: 'oneplus', name: 'OnePlus', icon: 'Zap', count: 'OxygenOS Stock Packages' },
+      { id: 'htc', name: 'HTC (One / U / Desire / HD2)', icon: 'Cpu', count: 'Official RUU Stock Images' },
       { id: 'nokia', name: 'Nokia (Symbian & S40 Java)', icon: 'Radio', count: 'S60 / Symbian^3 / S40' },
       { id: 'sonyericsson', name: 'Sony Ericsson (Java & UIQ)', icon: 'Disc', count: 'Walkman / Cyber-shot / A2' },
       { id: 'samsung_feature', name: 'Samsung Keypad (Java Feature)', icon: 'Smartphone', count: 'Guru Music / Metro / Duos' }

@@ -29,12 +29,16 @@ export default function FirmwareHub({ onStartDownload, onPrepareFlash }) {
 
   const brands = [
     { id: 'apple', name: 'Apple iOS / iPad', logo: '' },
+    { id: 'motorola', name: 'Motorola', logo: 'M' },
+    { id: 'vivo', name: 'Vivo & iQOO', logo: 'vivo' },
+    { id: 'oppo', name: 'Oppo & Realme', logo: 'oppo' },
     { id: 'honor', name: 'Honor', logo: 'H' },
     { id: 'redmi', name: 'Redmi Series', logo: 'Redmi' },
     { id: 'xiaomi', name: 'Xiaomi / POCO', logo: 'Mi' },
     { id: 'samsung', name: 'Samsung Galaxy', logo: 'S' },
     { id: 'google', name: 'Google Pixel', logo: 'G' },
     { id: 'oneplus', name: 'OnePlus', logo: '1+' },
+    { id: 'htc', name: 'HTC', logo: 'htc' },
     { id: 'nokia', name: 'Nokia (Symbian & Java)', logo: 'N' },
     { id: 'sonyericsson', name: 'Sony Ericsson (Java)', logo: 'SE' },
     { id: 'samsung_feature', name: 'Samsung Keypad (Java)', logo: '123' },
