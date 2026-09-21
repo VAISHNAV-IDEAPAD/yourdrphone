@@ -171,6 +171,18 @@ const { MICROMAX_REGISTRY } = require('./micromaxRegistry');
 // Lava & Maxx Mobile Registry
 const { LAVA_REGISTRY, MAXX_REGISTRY } = require('./lavaRegistry');
 
+// Nokia Android Registry
+const { NOKIA_ANDROID_REGISTRY } = require('./nokiaAndroidRegistry');
+
+// LG Electronics Registry
+const { LG_REGISTRY } = require('./lgRegistry');
+
+// Panasonic Registry
+const { PANASONIC_REGISTRY } = require('./panasonicRegistry');
+
+// Sony Xperia Registry
+const { SONY_REGISTRY } = require('./sonyRegistry');
+
 // OnePlus Registry
 const ONEPLUS_REGISTRY = [
   {
@@ -674,6 +686,16 @@ class FirmwareService {
       case 'max':
       case 'maxx':
         return MAXX_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'max', series: d.series, chipset: d.chipset, bootKey: d.bootKey }));
+      case 'nokia_android':
+      case 'nokiaandroid':
+        return NOKIA_ANDROID_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'nokia_android', series: d.series, chipset: d.chipset, bootKey: d.bootKey }));
+      case 'lg':
+        return LG_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'lg', series: d.series, chipset: d.chipset, bootKey: d.bootKey }));
+      case 'panasonic':
+        return PANASONIC_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'panasonic', series: d.series, chipset: d.chipset, bootKey: d.bootKey }));
+      case 'sony':
+      case 'xperia':
+        return SONY_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'sony', series: d.series, chipset: d.chipset, bootKey: d.bootKey }));
       default:
         return [];
     }
@@ -709,7 +731,11 @@ class FirmwareService {
       case 'oneplus':
         return ONEPLUS_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
       case 'nokia':
-        return NOKIA_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+        return NOKIA_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) ||
+               NOKIA_ANDROID_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+      case 'nokia_android':
+      case 'nokiaandroid':
+        return NOKIA_ANDROID_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
       case 'sonyericsson':
         return SONY_ERICSSON_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
       case 'samsung_feature':
@@ -727,6 +753,13 @@ class FirmwareService {
       case 'max':
       case 'maxx':
         return MAXX_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+      case 'lg':
+        return LG_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+      case 'panasonic':
+        return PANASONIC_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+      case 'sony':
+      case 'xperia':
+        return SONY_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
       default:
         return null;
     }

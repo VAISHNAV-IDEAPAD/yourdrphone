@@ -47,6 +47,10 @@ export default function FirmwareHub({ onStartDownload, onPrepareFlash }) {
     { id: 'micromax', name: 'Micromax', logo: 'MMX' },
     { id: 'lava', name: 'Lava', logo: 'Lava' },
     { id: 'max', name: 'Maxx Mobile', logo: 'Maxx' },
+    { id: 'nokia_android', name: 'Nokia (Android)', logo: 'NOK' },
+    { id: 'lg', name: 'LG Electronics', logo: 'LG' },
+    { id: 'panasonic', name: 'Panasonic', logo: 'Pana' },
+    { id: 'sony', name: 'Sony Xperia', logo: 'Sony' },
   ];
 
   // Fetch models whenever brand changes

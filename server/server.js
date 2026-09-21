@@ -108,7 +108,11 @@ app.get('/api/firmware/brands', (req, res) => {
       { id: 'jio', name: 'Reliance JioPhone (KaiOS & Pragati)', icon: 'Radio', count: 'QFIL Firehose & SPD PAC' },
       { id: 'micromax', name: 'Micromax (IN Series & Canvas)', icon: 'Smartphone', count: 'SP Flash Tool & PAC' },
       { id: 'lava', name: 'Lava (Agni 5G, Blaze & Yuva)', icon: 'Flame', count: 'Dimensity & Unisoc ROMs' },
-      { id: 'max', name: 'Max / Maxx Mobile (Android & Keypad)', icon: 'Zap', count: 'SP Flash & SPD PAC' }
+      { id: 'max', name: 'Max / Maxx Mobile (Android & Keypad)', icon: 'Zap', count: 'SP Flash & SPD PAC' },
+      { id: 'nokia_android', name: 'Nokia (Android / HMD Global)', icon: 'Radio', count: 'PureView, G & X Series (Fastboot)' },
+      { id: 'lg', name: 'LG Electronics', icon: 'Smartphone', count: 'Wing, Velvet, V60 (Official KDZ)' },
+      { id: 'panasonic', name: 'Panasonic Mobile', icon: 'Cpu', count: 'Eluga & P Series (SP Flash)' },
+      { id: 'sony', name: 'Sony Xperia', icon: 'Disc', count: 'Xperia 1 / 5 / 10 (Newflasher .sin)' }
     ]
   });
 });

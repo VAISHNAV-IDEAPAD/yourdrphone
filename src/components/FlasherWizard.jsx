@@ -27,7 +27,7 @@ export default function FlasherWizard({
   onAbortFlash,
   onReboot 
 }) {
-  const [flashMode, setFlashMode] = useState('fastboot_partition'); // fastboot_partition, sideload, guided_samsung, guided_apple, guided_nokia, guided_se, guided_samsung_keypad, guided_blackberry, guided_jio, guided_sp_flash
+  const [flashMode, setFlashMode] = useState('fastboot_partition'); // fastboot_partition, sideload, guided_samsung, guided_apple, guided_nokia, guided_se, guided_samsung_keypad, guided_blackberry, guided_jio, guided_sp_flash, guided_lg, guided_sony, guided_nokia_android
   const [selectedPartition, setSelectedPartition] = useState('boot');
   const [filePath, setFilePath] = useState('');
   const [confirmedBackup, setConfirmedBackup] = useState(false);
@@ -56,8 +56,14 @@ export default function FlasherWizard({
         setFlashMode('guided_blackberry');
       } else if (flashTarget.brand === 'jio') {
         setFlashMode('guided_jio');
-      } else if (['micromax', 'lava', 'max'].includes(flashTarget.brand)) {
+      } else if (['micromax', 'lava', 'max', 'panasonic'].includes(flashTarget.brand)) {
         setFlashMode('guided_sp_flash');
+      } else if (flashTarget.brand === 'lg') {
+        setFlashMode('guided_lg');
+      } else if (flashTarget.brand === 'sony') {
+        setFlashMode('guided_sony');
+      } else if (flashTarget.brand === 'nokia_android') {
+        setFlashMode('guided_nokia_android');
       }
     }
   }, [flashTarget]);
@@ -134,7 +140,10 @@ export default function FlasherWizard({
           { id: 'guided_samsung_keypad', title: 'Samsung Keypad FlashLoader', desc: 'Spreadtrum & Swift FlashLoader', icon: Smartphone },
           { id: 'guided_blackberry', title: 'BlackBerry Flasher', desc: 'BB10 Autoloader, Android & BBOS', icon: Smartphone },
           { id: 'guided_jio', title: 'JioPhone QFIL / SPD', desc: 'Qualcomm Firehose & SPD PAC', icon: Radio },
-          { id: 'guided_sp_flash', title: 'SP Flash & SPD PAC', desc: 'Micromax, Lava & Maxx MTK / SPD', icon: Cpu },
+          { id: 'guided_sp_flash', title: 'SP Flash & SPD PAC', desc: 'Micromax, Lava, Maxx & Pana MTK', icon: Cpu },
+          { id: 'guided_lg', title: 'LG UP KDZ Flasher', desc: 'Hold Vol Up for Download Mode', icon: Smartphone },
+          { id: 'guided_sony', title: 'Sony Xperia Flashmode', desc: 'Hold Vol Down (Green LED) & Newflasher', icon: Disc },
+          { id: 'guided_nokia_android', title: 'Nokia Android HMD', desc: 'Fastbootd & OST Service Tool', icon: Radio },
         ].map((mode) => {
           const Icon = mode.icon;
           const isSelected = flashMode === mode.id;
@@ -726,7 +735,7 @@ export default function FlasherWizard({
         </div>
       )}
 
-      {/* Mode Content: 10. SP Flash Tool & SPD Universal Guide (Micromax / Lava / Maxx) */}
+      {/* Mode Content: 10. SP Flash Tool & SPD Universal Guide (Micromax / Lava / Maxx / Panasonic) */}
       {flashMode === 'guided_sp_flash' && (
         <div className="p-8 rounded-2xl bg-surface-850 border border-surface-750 space-y-6">
           <div className="flex items-center gap-3">
@@ -735,7 +744,7 @@ export default function FlasherWizard({
             </div>
             <div>
               <h2 className="text-lg font-bold text-white">MediaTek SP Flash Tool & Unisoc SPD PAC Guide</h2>
-              <p className="text-xs text-slate-400">Universal unbricking & stock firmware flashing for Micromax, Lava, and Maxx Mobile</p>
+              <p className="text-xs text-slate-400">Universal unbricking & stock firmware flashing for Micromax, Lava, Maxx Mobile, and Panasonic</p>
             </div>
           </div>
 
@@ -744,7 +753,7 @@ export default function FlasherWizard({
             <div className="p-5 rounded-xl bg-surface-800/80 border border-surface-700 space-y-3">
               <div className="flex items-center gap-2">
                 <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-orange-500/20 text-orange-300">
-                  MEDIATEK HELIO / DIMENSITY (IN NOTE, AGNI 5G, BLAZE, CANVAS)
+                  MEDIATEK HELIO / DIMENSITY (IN NOTE, AGNI 5G, BLAZE, ELUGA, CANVAS)
                 </span>
               </div>
               <h4 className="font-bold text-white text-xs">Method 1: SP Flash Tool (MTK Scatter)</h4>
@@ -774,6 +783,158 @@ export default function FlasherWizard({
                 <li>Click the Play button (<strong className="text-white">Start Downloading</strong>).</li>
                 <li>Power off the phone. Hold <strong className="text-white">Volume Down</strong> (for smartphones like IN 2b or Lava Yuva) or <strong className="text-white">Center OK</strong> (for keypad feature phones).</li>
                 <li>Connect USB cable. Release key when the download process begins and wait for the green <strong className="text-emerald-400">Passed</strong> indicator!</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mode Content: 11. LG UP & KDZ Flasher Guide */}
+      {flashMode === 'guided_lg' && (
+        <div className="p-8 rounded-2xl bg-surface-850 border border-surface-750 space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400">
+              <Smartphone className="w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-white">LG Electronics Official KDZ Flashing Guide</h2>
+              <p className="text-xs text-slate-400">LG UP Tool, Download Mode (Firmware Update screen), and KDZ Stock Firmware Restore</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* Method 1: LG UP Tool */}
+            <div className="p-5 rounded-xl bg-surface-800/80 border border-surface-700 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-pink-500/20 text-pink-300">
+                  RECOMMENDED: WING, VELVET, V60, G8, V50, G7
+                </span>
+              </div>
+              <h4 className="font-bold text-white text-xs">Method 1: LG UP Tool (.KDZ Firmware)</h4>
+              <ol className="list-decimal list-inside space-y-2 text-xs text-slate-300 leading-relaxed">
+                <li>Install official <strong className="text-white">LG Mobile USB Drivers</strong> and <strong className="text-white">LG UP</strong> (with Patched LGUP DLL).</li>
+                <li>Turn off your LG phone completely.</li>
+                <li>Press and hold <strong className="text-pink-400">Volume Up</strong> (do NOT press Power).</li>
+                <li>While holding Volume Up, connect the USB cable to PC. The screen will display <strong className="text-white">"Firmware Update"</strong> (LG Download Mode).</li>
+                <li>Launch LG UP. Your device COM port and model will detect automatically.</li>
+                <li>Select Process: <strong className="text-white">UPGRADE</strong> (to update/restore without wiping) or <strong className="text-amber-400">REFURBISH / CHIP EFFACE</strong> (clean factory reset).</li>
+                <li>Click the File Path box, choose the downloaded <code className="text-pink-300">.kdz</code> file, and click <strong className="text-white">Start</strong>!</li>
+              </ol>
+            </div>
+
+            {/* Method 2: LG Flash Tool & Fastboot */}
+            <div className="p-5 rounded-xl bg-surface-800/80 border border-surface-700 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-500/20 text-indigo-300">
+                  LEGACY LG & GOOGLE NEXUS
+                </span>
+              </div>
+              <h4 className="font-bold text-white text-xs">Method 2: LG Flash Tool 2014 & Google Nexus Fastboot</h4>
+              <ol className="list-decimal list-inside space-y-2 text-xs text-slate-300 leading-relaxed">
+                <li><strong className="text-white">LG Flash Tool 2014:</strong> For older devices (G6, G5, V30, G4), select <code className="text-indigo-300">3GQCT</code> and <code className="text-indigo-300">DIAG</code>, load the KDZ, and click <strong className="text-white">CSE Flash</strong> to recover from bootloops.</li>
+                <li><strong className="text-white">LG Nexus 5X / Nexus 5:</strong> Hold <strong className="text-white">Volume Down + Power</strong> to enter Google Fastboot Mode. Flash using <code className="text-indigo-300">fastboot flash-all.bat</code>.</li>
+                <li><strong className="text-white">LG Bridge:</strong> Official Windows desktop suite for OTA updates, backup, and USB device recovery.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mode Content: 12. Sony Xperia Flasher Guide */}
+      {flashMode === 'guided_sony' && (
+        <div className="p-8 rounded-2xl bg-surface-850 border border-surface-750 space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+              <Disc className="w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-white">Sony Xperia Flashmode & Newflasher Guide</h2>
+              <p className="text-xs text-slate-400">Sony S1 Flashmode (Green LED), Newflasher (.sin files), and Flashtool (.FTF)</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* Method 1: Newflasher */}
+            <div className="p-5 rounded-xl bg-surface-800/80 border border-surface-700 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-300">
+                  XPERIA 1, 5, 10, PRO-I & MODERN SONY
+                </span>
+              </div>
+              <h4 className="font-bold text-white text-xs">Method 1: Newflasher (.sin Partition Flashing)</h4>
+              <ol className="list-decimal list-inside space-y-2 text-xs text-slate-300 leading-relaxed">
+                <li>Download official stock firmware using <strong className="text-white">XperiFirm</strong> or the links in the Firmware Hub.</li>
+                <li>Extract all files into a single folder (contains <code className="text-blue-300">boot.sin</code>, <code className="text-blue-300">super.sin</code>, etc.).</li>
+                <li>Download <code className="text-white">newflasher.exe</code> and place it inside the same extracted firmware folder.</li>
+                <li>Power off your Sony Xperia phone completely.</li>
+                <li>Press and hold <strong className="text-emerald-400">Volume Down</strong> and connect the USB cable to PC.</li>
+                <li>The notification LED will illuminate <strong className="text-emerald-400">Green</strong> (Sony Flashmode).</li>
+                <li>Run <code className="text-white">newflasher.exe</code> as Administrator. It will flash all partitions safely in 2-3 minutes!</li>
+              </ol>
+            </div>
+
+            {/* Method 2: Fastboot & Flashtool */}
+            <div className="p-5 rounded-xl bg-surface-800/80 border border-surface-700 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-500/20 text-indigo-300">
+                  FASTBOOT (BLUE LED) & CLASSIC FTF
+                </span>
+              </div>
+              <h4 className="font-bold text-white text-xs">Method 2: Fastboot Mode (Blue LED) & Flashtool</h4>
+              <ol className="list-decimal list-inside space-y-2 text-xs text-slate-300 leading-relaxed">
+                <li><strong className="text-white">Fastboot Mode:</strong> Power off phone. Hold <strong className="text-blue-400">Volume Up</strong> and connect USB cable. The LED turns <strong className="text-blue-400">Blue</strong>. Flash kernel or recovery using standard fastboot.</li>
+                <li><strong className="text-white">Androxyde Flashtool (.FTF):</strong> For classic Xperia Z and XZ models, open Flashtool, click the Thunder icon, select Flashmode, choose your <code className="text-indigo-300">.ftf</code> file, and connect holding Volume Down.</li>
+                <li><strong className="text-white">Sony Emma:</strong> Official Sony developer tool for unlocked bootloader devices.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mode Content: 13. Nokia Android Flasher Guide */}
+      {flashMode === 'guided_nokia_android' && (
+        <div className="p-8 rounded-2xl bg-surface-850 border border-surface-750 space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+              <Radio className="w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-white">Nokia Android (HMD Global) Flashing Guide</h2>
+              <p className="text-xs text-slate-400">Fastboot / Fastbootd Mode, OST LA Service Packages, and Unisoc / MediaTek Unbrick</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* Qualcomm Fastboot Models */}
+            <div className="p-5 rounded-xl bg-surface-800/80 border border-surface-700 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/20 text-cyan-300">
+                  QUALCOMM (PUREVIEW 9, 8.3, 7 PLUS, 6.1, X30, 5.4)
+                </span>
+              </div>
+              <h4 className="font-bold text-white text-xs">Method 1: Fastboot / Fastbootd & OST LA</h4>
+              <ol className="list-decimal list-inside space-y-2 text-xs text-slate-300 leading-relaxed">
+                <li>Power off your Nokia Android device.</li>
+                <li>Press and hold <strong className="text-white">Volume Down + Power</strong> until <strong className="text-cyan-400">FASTBOOT MODE</strong> appears on screen.</li>
+                <li>Connect USB cable to PC.</li>
+                <li>For Android 10+ dynamic partition devices, enter fastbootd with <code className="text-cyan-300">fastboot reboot fastboot</code>.</li>
+                <li>Flash official images: <code className="text-cyan-300">fastboot flash boot boot.img</code>, <code className="text-cyan-300">fastboot flash super super.img</code>.</li>
+                <li>Or open <strong className="text-white">Online Service Tool (OST LA)</strong>, load the official <code className="text-cyan-300">.nbx</code> service package, and click Next.</li>
+              </ol>
+            </div>
+
+            {/* Unisoc & MediaTek Models */}
+            <div className="p-5 rounded-xl bg-surface-800/80 border border-surface-700 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-300">
+                  UNISOC & MEDIATEK (G21, C31, 2.4, NOKIA 1)
+                </span>
+              </div>
+              <h4 className="font-bold text-white text-xs">Method 2: SPD Upgrade Tool & SP Flash Tool</h4>
+              <ol className="list-decimal list-inside space-y-2 text-xs text-slate-300 leading-relaxed">
+                <li><strong className="text-white">Unisoc (Nokia G21 / C31):</strong> Load the downloaded <code className="text-purple-300">.pac</code> file into SPD ResearchDownload, click Start, hold <strong className="text-white">Volume Down</strong>, and plug in USB.</li>
+                <li><strong className="text-white">MediaTek (Nokia 2.4 / Nokia 1):</strong> Open SP Flash Tool, load <code className="text-purple-300">MT6762_Android_scatter.txt</code>, click Download, hold <strong className="text-white">Volume Down</strong>, and connect USB cable.</li>
+                <li>Wait for the green checkmark indicator confirming successful restore!</li>
               </ol>
             </div>
           </div>
