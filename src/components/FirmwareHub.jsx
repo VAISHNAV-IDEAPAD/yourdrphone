@@ -29,6 +29,7 @@ export default function FirmwareHub({ onStartDownload, onPrepareFlash }) {
 
   const brands = [
     { id: 'apple', name: 'Apple iOS / iPad', logo: '' },
+    { id: 'honor', name: 'Honor', logo: 'H' },
     { id: 'redmi', name: 'Redmi Series', logo: 'Redmi' },
     { id: 'xiaomi', name: 'Xiaomi / POCO', logo: 'Mi' },
     { id: 'samsung', name: 'Samsung Galaxy', logo: 'S' },

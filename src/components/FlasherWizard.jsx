@@ -44,6 +44,8 @@ export default function FlasherWizard({
         setFlashMode('guided_samsung');
       } else if (flashTarget.brand === 'apple') {
         setFlashMode('guided_apple');
+      } else if (flashTarget.brand === 'honor') {
+        setFlashMode('guided_honor');
       } else if (flashTarget.brand === 'nokia') {
         setFlashMode('guided_nokia');
       } else if (flashTarget.brand === 'sonyericsson') {
@@ -120,6 +122,7 @@ export default function FlasherWizard({
           { id: 'sideload', title: 'ADB Sideload', desc: 'Install full OTA zip in recovery mode', icon: HardDrive },
           { id: 'guided_samsung', title: 'Samsung Odin Guide', desc: 'Stock 4-File (BL, AP, CP, CSC) flashing', icon: Layers },
           { id: 'guided_apple', title: 'Apple IPSW Restore', desc: 'DFU / Recovery mode official restore', icon: Smartphone },
+          { id: 'guided_honor', title: 'Honor dload & eRecovery', desc: 'Hold Vol Up+Down+Power or Fastboot', icon: Smartphone },
           { id: 'guided_nokia', title: 'Nokia Dead USB Flasher', desc: 'Phoenix & BEST S60/S40 Dead Mode', icon: Radio },
           { id: 'guided_se', title: 'Sony Ericsson "C" Mode', desc: 'Hold "C" / 2+5 Key A2 Platform', icon: Disc },
           { id: 'guided_samsung_keypad', title: 'Samsung Keypad FlashLoader', desc: 'Spreadtrum & Swift FlashLoader', icon: Smartphone },
@@ -529,6 +532,56 @@ export default function FlasherWizard({
                 2. Click <strong className="text-white">START</strong>.<br />
                 3. Hold down keys <strong className="text-white">1 + 3</strong> or <strong className="text-white">Center OK</strong> while plugging in USB cable without battery, then insert battery.
               </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mode Content: 7. Honor dload & eRecovery Guide */}
+      {flashMode === 'guided_honor' && (
+        <div className="p-8 rounded-2xl bg-surface-850 border border-surface-750 space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+              <Smartphone className="w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-white">Honor Stock Firmware Flashing Guide</h2>
+              <p className="text-xs text-slate-400">Official dload Service Method (UPDATE.APP), Fastboot Mode, and Honor eRecovery</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* Method 1: dload Service Mode */}
+            <div className="p-5 rounded-xl bg-surface-800/80 border border-surface-700 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/20 text-cyan-300">
+                  RECOMMENDED FOR BRICKED PHONES
+                </span>
+              </div>
+              <h4 className="font-bold text-white text-xs">Method 1: SD Card / OTG dload Mode (UPDATE.APP)</h4>
+              <ol className="list-decimal list-inside space-y-2 text-xs text-slate-300 leading-relaxed">
+                <li>Prepare a MicroSD Card or USB-OTG drive formatted as <strong className="text-white">FAT32 or exFAT</strong>.</li>
+                <li>Create a folder named <code className="text-cyan-300">dload</code> in the root directory.</li>
+                <li>Extract the firmware and copy <code className="text-cyan-300">UPDATE.APP</code> (and regional update files) into the <code className="text-cyan-300">dload</code> folder.</li>
+                <li>Turn off your Honor phone completely.</li>
+                <li>Press and hold <strong className="text-white">Volume Up + Volume Down + Power</strong> simultaneously.</li>
+                <li>Release keys when the Honor Software Upgrade screen appears. The update will verify and flash automatically!</li>
+              </ol>
+            </div>
+
+            {/* Method 2: Fastboot & eRecovery Mode */}
+            <div className="p-5 rounded-xl bg-surface-800/80 border border-surface-700 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-500/20 text-indigo-300">
+                  MODERN MAGICOSE RECOVERY
+                </span>
+              </div>
+              <h4 className="font-bold text-white text-xs">Method 2: Honor Fastboot & Wi-Fi eRecovery</h4>
+              <ol className="list-decimal list-inside space-y-2 text-xs text-slate-300 leading-relaxed">
+                <li><strong className="text-white">Fastboot Mode:</strong> Power off phone. Hold <strong className="text-white">Volume Down</strong> and plug in USB cable connected to PC. The white Fastboot / Rescue screen will appear.</li>
+                <li><strong className="text-white">eRecovery Wi-Fi Restore:</strong> Power off phone. Hold <strong className="text-white">Volume Up + Power</strong> while USB is connected. Choose <strong className="text-white">"Download latest version and recovery"</strong> to install official certified firmware directly over Wi-Fi.</li>
+                <li><strong className="text-white">Honor Suite:</strong> Connect phone in normal mode or eRecovery and select System Update / Recovery in Honor PC Suite.</li>
+              </ol>
             </div>
           </div>
         </div>

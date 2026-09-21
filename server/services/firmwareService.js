@@ -144,6 +144,9 @@ const SAMSUNG_REGISTRY = [
 const { REDMI_AND_XIAOMI_REGISTRY } = require('./redmiRegistry');
 const XIAOMI_REGISTRY = REDMI_AND_XIAOMI_REGISTRY;
 
+// Honor Registry
+const { HONOR_REGISTRY } = require('./honorRegistry');
+
 // OnePlus Registry
 const ONEPLUS_REGISTRY = [
   {
@@ -613,6 +616,8 @@ class FirmwareService {
       case 'xiaomi':
       case 'poco':
         return REDMI_AND_XIAOMI_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: d.brand, series: d.series, chipset: d.chipset }));
+      case 'honor':
+        return HONOR_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'honor', series: d.series, chipset: d.chipset }));
       case 'oneplus':
         return ONEPLUS_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'oneplus' }));
       case 'nokia':
@@ -640,6 +645,8 @@ class FirmwareService {
       case 'xiaomi':
       case 'poco':
         return REDMI_AND_XIAOMI_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+      case 'honor':
+        return HONOR_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
       case 'oneplus':
         return ONEPLUS_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
       case 'nokia':
