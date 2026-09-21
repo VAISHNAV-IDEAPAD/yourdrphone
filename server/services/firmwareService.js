@@ -159,6 +159,18 @@ const { VIVO_REGISTRY } = require('./vivoRegistry');
 // Oppo & Realme Registry
 const { OPPO_REGISTRY } = require('./oppoRegistry');
 
+// BlackBerry Registry
+const { BLACKBERRY_REGISTRY } = require('./blackberryRegistry');
+
+// Reliance Jio Registry
+const { JIO_REGISTRY } = require('./jioRegistry');
+
+// Micromax Registry
+const { MICROMAX_REGISTRY } = require('./micromaxRegistry');
+
+// Lava & Maxx Mobile Registry
+const { LAVA_REGISTRY, MAXX_REGISTRY } = require('./lavaRegistry');
+
 // OnePlus Registry
 const ONEPLUS_REGISTRY = [
   {
@@ -649,6 +661,19 @@ class FirmwareService {
         return SONY_ERICSSON_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'sonyericsson', platform: d.platform, osType: d.osType }));
       case 'samsung_feature':
         return SAMSUNG_FEATURE_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'samsung_feature', platform: d.platform, osType: d.osType }));
+      case 'blackberry':
+      case 'bb':
+        return BLACKBERRY_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'blackberry', series: d.series, chipset: d.chipset, bootKey: d.bootKey }));
+      case 'jio':
+      case 'jiophone':
+        return JIO_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'jio', series: d.series, chipset: d.chipset, bootKey: d.bootKey }));
+      case 'micromax':
+        return MICROMAX_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'micromax', series: d.series, chipset: d.chipset, bootKey: d.bootKey }));
+      case 'lava':
+        return LAVA_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'lava', series: d.series, chipset: d.chipset, bootKey: d.bootKey }));
+      case 'max':
+      case 'maxx':
+        return MAXX_REGISTRY.map(d => ({ model: d.model, code: d.code, brand: 'max', series: d.series, chipset: d.chipset, bootKey: d.bootKey }));
       default:
         return [];
     }
@@ -689,6 +714,19 @@ class FirmwareService {
         return SONY_ERICSSON_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
       case 'samsung_feature':
         return SAMSUNG_FEATURE_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+      case 'blackberry':
+      case 'bb':
+        return BLACKBERRY_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+      case 'jio':
+      case 'jiophone':
+        return JIO_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+      case 'micromax':
+        return MICROMAX_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+      case 'lava':
+        return LAVA_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
+      case 'max':
+      case 'maxx':
+        return MAXX_REGISTRY.find(d => d.code.toLowerCase() === code.toLowerCase() || d.model.toLowerCase() === code.toLowerCase()) || null;
       default:
         return null;
     }

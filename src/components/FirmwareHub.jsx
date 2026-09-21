@@ -42,6 +42,11 @@ export default function FirmwareHub({ onStartDownload, onPrepareFlash }) {
     { id: 'nokia', name: 'Nokia (Symbian & Java)', logo: 'N' },
     { id: 'sonyericsson', name: 'Sony Ericsson (Java)', logo: 'SE' },
     { id: 'samsung_feature', name: 'Samsung Keypad (Java)', logo: '123' },
+    { id: 'blackberry', name: 'BlackBerry', logo: 'BB' },
+    { id: 'jio', name: 'Reliance Jio', logo: 'Jio' },
+    { id: 'micromax', name: 'Micromax', logo: 'MMX' },
+    { id: 'lava', name: 'Lava', logo: 'Lava' },
+    { id: 'max', name: 'Maxx Mobile', logo: 'Maxx' },
   ];
 
   // Fetch models whenever brand changes

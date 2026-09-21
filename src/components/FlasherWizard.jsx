@@ -27,7 +27,7 @@ export default function FlasherWizard({
   onAbortFlash,
   onReboot 
 }) {
-  const [flashMode, setFlashMode] = useState('fastboot_partition'); // fastboot_partition, sideload, guided_samsung, guided_apple, guided_nokia, guided_se, guided_samsung_keypad
+  const [flashMode, setFlashMode] = useState('fastboot_partition'); // fastboot_partition, sideload, guided_samsung, guided_apple, guided_nokia, guided_se, guided_samsung_keypad, guided_blackberry, guided_jio, guided_sp_flash
   const [selectedPartition, setSelectedPartition] = useState('boot');
   const [filePath, setFilePath] = useState('');
   const [confirmedBackup, setConfirmedBackup] = useState(false);
@@ -52,6 +52,12 @@ export default function FlasherWizard({
         setFlashMode('guided_se');
       } else if (flashTarget.brand === 'samsung_feature') {
         setFlashMode('guided_samsung_keypad');
+      } else if (flashTarget.brand === 'blackberry') {
+        setFlashMode('guided_blackberry');
+      } else if (flashTarget.brand === 'jio') {
+        setFlashMode('guided_jio');
+      } else if (['micromax', 'lava', 'max'].includes(flashTarget.brand)) {
+        setFlashMode('guided_sp_flash');
       }
     }
   }, [flashTarget]);
@@ -126,6 +132,9 @@ export default function FlasherWizard({
           { id: 'guided_nokia', title: 'Nokia Dead USB Flasher', desc: 'Phoenix & BEST S60/S40 Dead Mode', icon: Radio },
           { id: 'guided_se', title: 'Sony Ericsson "C" Mode', desc: 'Hold "C" / 2+5 Key A2 Platform', icon: Disc },
           { id: 'guided_samsung_keypad', title: 'Samsung Keypad FlashLoader', desc: 'Spreadtrum & Swift FlashLoader', icon: Smartphone },
+          { id: 'guided_blackberry', title: 'BlackBerry Flasher', desc: 'BB10 Autoloader, Android & BBOS', icon: Smartphone },
+          { id: 'guided_jio', title: 'JioPhone QFIL / SPD', desc: 'Qualcomm Firehose & SPD PAC', icon: Radio },
+          { id: 'guided_sp_flash', title: 'SP Flash & SPD PAC', desc: 'Micromax, Lava & Maxx MTK / SPD', icon: Cpu },
         ].map((mode) => {
           const Icon = mode.icon;
           const isSelected = flashMode === mode.id;
@@ -581,6 +590,190 @@ export default function FlasherWizard({
                 <li><strong className="text-white">Fastboot Mode:</strong> Power off phone. Hold <strong className="text-white">Volume Down</strong> and plug in USB cable connected to PC. The white Fastboot / Rescue screen will appear.</li>
                 <li><strong className="text-white">eRecovery Wi-Fi Restore:</strong> Power off phone. Hold <strong className="text-white">Volume Up + Power</strong> while USB is connected. Choose <strong className="text-white">"Download latest version and recovery"</strong> to install official certified firmware directly over Wi-Fi.</li>
                 <li><strong className="text-white">Honor Suite:</strong> Connect phone in normal mode or eRecovery and select System Update / Recovery in Honor PC Suite.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mode Content: 8. BlackBerry Flasher Guide */}
+      {flashMode === 'guided_blackberry' && (
+        <div className="p-8 rounded-2xl bg-surface-850 border border-surface-750 space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+              <Smartphone className="w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-white">BlackBerry Official Flashing Guide</h2>
+              <p className="text-xs text-slate-400">BB10 Autoloaders, Android Fastboot Packages & Legacy BBOS 7/5 Apploader</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {/* Method 1: BB10 Autoloader */}
+            <div className="p-5 rounded-xl bg-surface-800/80 border border-surface-700 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300">
+                  BB10 (PASSPORT, CLASSIC, Q10, Z10)
+                </span>
+              </div>
+              <h4 className="font-bold text-white text-xs">Method 1: Standalone .exe Autoloader</h4>
+              <ol className="list-decimal list-inside space-y-2 text-xs text-slate-300 leading-relaxed">
+                <li>Install official <strong className="text-white">BlackBerry USB Drivers</strong>.</li>
+                <li>Run the downloaded Autoloader <code className="text-emerald-300">.exe</code> file as Administrator.</li>
+                <li>When the black terminal says <em className="text-slate-400">"Connecting to Bootrom"</em>, power off phone and connect USB cable.</li>
+                <li>The LED will turn solid green or blink rapidly.</li>
+                <li>The Autoloader wipes and flashes Radio, OS, and partitions automatically. Phone reboots when 100% complete!</li>
+              </ol>
+            </div>
+
+            {/* Method 2: Android BlackBerry */}
+            <div className="p-5 rounded-xl bg-surface-800/80 border border-surface-700 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-300">
+                  ANDROID (KEY2, KEYONE, PRIV)
+                </span>
+              </div>
+              <h4 className="font-bold text-white text-xs">Method 2: Fastboot flashall Script</h4>
+              <ol className="list-decimal list-inside space-y-2 text-xs text-slate-300 leading-relaxed">
+                <li>Turn off device completely.</li>
+                <li>Press and hold <strong className="text-white">Volume Down + Power</strong> until the Fastboot screen appears.</li>
+                <li>Connect USB cable to computer.</li>
+                <li>Extract the official BlackBerry stock firmware zip.</li>
+                <li>Run <code className="text-blue-300">flashall.bat</code> (Windows) or <code className="text-blue-300">flashall.sh</code> (Mac/Linux).</li>
+                <li>Wait until all sparse system chunks and bootloaders flash cleanly.</li>
+              </ol>
+            </div>
+
+            {/* Method 3: Legacy BBOS Apploader */}
+            <div className="p-5 rounded-xl bg-surface-800/80 border border-surface-700 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300">
+                  BBOS 7 & 5 (BOLD, CURVE, TORCH)
+                </span>
+              </div>
+              <h4 className="font-bold text-white text-xs">Method 3: AppLoader (Vendor.xml Hack)</h4>
+              <ol className="list-decimal list-inside space-y-2 text-xs text-slate-300 leading-relaxed">
+                <li>Install BlackBerry Desktop Software and the official OS package for your model.</li>
+                <li>Open <code className="text-amber-300">C:\Program Files (x86)\Common Files\Research In Motion\AppLoader</code>.</li>
+                <li><strong className="text-amber-400">CRUCIAL:</strong> Delete or rename <code className="text-white">Vendor.xml</code>.</li>
+                <li>Launch <code className="text-amber-300">Loader.exe</code>, remove battery from phone, and connect USB.</li>
+                <li>When PIN appears, insert battery and proceed to restore OS!</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mode Content: 9. JioPhone Flasher Guide */}
+      {flashMode === 'guided_jio' && (
+        <div className="p-8 rounded-2xl bg-surface-850 border border-surface-750 space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400">
+              <Radio className="w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-white">Reliance JioPhone Emergency Flashing Guide</h2>
+              <p className="text-xs text-slate-400">Qualcomm QFIL / QFlash 9008 EDL packages and Spreadtrum SPD ResearchDownload PAC files</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* Qualcomm QFIL Models */}
+            <div className="p-5 rounded-xl bg-surface-800/80 border border-surface-700 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-300">
+                  QUALCOMM SNAPDRAGON 205 (F220B, F90M, F120B, F50Y, F211S)
+                </span>
+              </div>
+              <h4 className="font-bold text-white text-xs">Method 1: Qualcomm QFIL / QFlash EDL 9008</h4>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                1. Open <strong className="text-white">QFIL</strong> or <strong className="text-white">QFlash</strong> tool.<br />
+                2. Select <strong className="text-white">Flat Build</strong>.<br />
+                3. Browse Programmer: <code className="text-rose-300">prog_emmc_firehose_8909.mbn</code>.<br />
+                4. Click 'Load XML' and select <code className="text-rose-300">rawprogram0.xml</code> then <code className="text-rose-300">patch0.xml</code>.<br />
+                5. <strong className="text-white">Device Boot Keys (Hold before plugging USB cable):</strong><br />
+                &bull; <strong className="text-white">F220B:</strong> Hold <strong className="text-amber-400">* (Star Key)</strong><br />
+                &bull; <strong className="text-white">F90M:</strong> Hold <strong className="text-amber-400">Center (OK)</strong> or <strong className="text-amber-400">1 Key</strong><br />
+                &bull; <strong className="text-white">F120B:</strong> Hold <strong className="text-amber-400">* + # Keys</strong><br />
+                &bull; <strong className="text-white">F50Y:</strong> Hold <strong className="text-amber-400">* or Left Key</strong><br />
+                &bull; <strong className="text-white">JioPhone 2 (F211S):</strong> Hold <strong className="text-amber-400">* + # Keys</strong><br />
+                6. Port will detect as <code className="text-emerald-400">Qualcomm HS-USB QDLoader 9008</code>. Click <strong className="text-white">Download</strong>!
+              </p>
+            </div>
+
+            {/* Spreadtrum PAC Models */}
+            <div className="p-5 rounded-xl bg-surface-800/80 border border-surface-700 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300">
+                  SPREADTRUM / UNISOC (F320B, F61F, JIO BHARAT V2)
+                </span>
+              </div>
+              <h4 className="font-bold text-white text-xs">Method 2: SPD Upgrade Tool (.PAC File)</h4>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                1. Open <strong className="text-white">SPD Upgrade Tool / ResearchDownload</strong>.<br />
+                2. Click the <strong className="text-white">Load Packet (First Gear)</strong> button and select the downloaded <code className="text-amber-300">.pac</code> file.<br />
+                3. Click the <strong className="text-white">Start Downloading (Play)</strong> button.<br />
+                4. Remove battery and reinsert.<br />
+                5. <strong className="text-white">Device Boot Keys (Hold while connecting USB):</strong><br />
+                &bull; <strong className="text-white">F320B:</strong> Hold <strong className="text-amber-400">* (Star Key)</strong><br />
+                &bull; <strong className="text-white">F61F:</strong> Hold <strong className="text-amber-400">Center OK Key</strong><br />
+                &bull; <strong className="text-white">Jio Bharat V2:</strong> Hold <strong className="text-amber-400">Center OK / Call Key</strong><br />
+                6. Release key when blue progress bar starts. Wait for green <strong className="text-emerald-400">Passed</strong> message.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mode Content: 10. SP Flash Tool & SPD Universal Guide (Micromax / Lava / Maxx) */}
+      {flashMode === 'guided_sp_flash' && (
+        <div className="p-8 rounded-2xl bg-surface-850 border border-surface-750 space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400">
+              <Cpu className="w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-white">MediaTek SP Flash Tool & Unisoc SPD PAC Guide</h2>
+              <p className="text-xs text-slate-400">Universal unbricking & stock firmware flashing for Micromax, Lava, and Maxx Mobile</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* SP Flash Tool (MediaTek) */}
+            <div className="p-5 rounded-xl bg-surface-800/80 border border-surface-700 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-orange-500/20 text-orange-300">
+                  MEDIATEK HELIO / DIMENSITY (IN NOTE, AGNI 5G, BLAZE, CANVAS)
+                </span>
+              </div>
+              <h4 className="font-bold text-white text-xs">Method 1: SP Flash Tool (MTK Scatter)</h4>
+              <ol className="list-decimal list-inside space-y-2 text-xs text-slate-300 leading-relaxed">
+                <li>Install <strong className="text-white">MediaTek MTK VCOM / CDC Drivers</strong>.</li>
+                <li>Launch <code className="text-orange-300">flash_tool.exe</code> as Administrator.</li>
+                <li>In <strong className="text-white">Scatter-loading File</strong>, browse and select <code className="text-orange-300">MTxxxx_Android_scatter.txt</code> from the extracted firmware.</li>
+                <li>Keep dropdown set to <strong className="text-white">Download Only</strong> (or <strong className="text-amber-400">Firmware Upgrade</strong> if phone is bricked or bootlooping).</li>
+                <li>Click the <strong className="text-white">Download</strong> button at top.</li>
+                <li>Power off your device completely. Hold <strong className="text-white">Volume Down</strong> (or Volume Up + Down) and plug in USB cable.</li>
+                <li>A red bar will load, followed by purple, and a yellow progress bar. A green circle checkmark confirms 100% completion!</li>
+              </ol>
+            </div>
+
+            {/* SPD ResearchDownload (Unisoc / Spreadtrum) */}
+            <div className="p-5 rounded-xl bg-surface-800/80 border border-surface-700 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-300">
+                  UNISOC / SPREADTRUM (IN 2B, YUVA 3, BHARAT 2+, MAXX)
+                </span>
+              </div>
+              <h4 className="font-bold text-white text-xs">Method 2: SPD Upgrade Tool (.PAC Packages)</h4>
+              <ol className="list-decimal list-inside space-y-2 text-xs text-slate-300 leading-relaxed">
+                <li>Install <strong className="text-white">Spreadtrum / Unisoc Driver</strong>.</li>
+                <li>Open <strong className="text-white">SPD Upgrade Tool / ResearchDownload</strong>.</li>
+                <li>Click the First Gear icon (<strong className="text-white">Load Packet</strong>) and select the <code className="text-purple-300">.pac</code> file.</li>
+                <li>Click the Play button (<strong className="text-white">Start Downloading</strong>).</li>
+                <li>Power off the phone. Hold <strong className="text-white">Volume Down</strong> (for smartphones like IN 2b or Lava Yuva) or <strong className="text-white">Center OK</strong> (for keypad feature phones).</li>
+                <li>Connect USB cable. Release key when the download process begins and wait for the green <strong className="text-emerald-400">Passed</strong> indicator!</li>
               </ol>
             </div>
           </div>

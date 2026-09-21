@@ -25,7 +25,12 @@ app.get('/api/firmware/brands', (req, res) => {
       { id: 'htc', name: 'HTC (One / U / Desire / HD2)', icon: 'Cpu', count: 'Official RUU Stock Images' },
       { id: 'nokia', name: 'Nokia (Symbian & S40 Java)', icon: 'Radio', count: 'S60 / Symbian^3 / S40' },
       { id: 'sonyericsson', name: 'Sony Ericsson (Java & UIQ)', icon: 'Disc', count: 'Walkman / Cyber-shot / A2' },
-      { id: 'samsung_feature', name: 'Samsung Keypad (Java Feature)', icon: 'Smartphone', count: 'Guru Music / Metro / Duos' }
+      { id: 'samsung_feature', name: 'Samsung Keypad (Java Feature)', icon: 'Smartphone', count: 'Guru Music / Metro / Duos' },
+      { id: 'blackberry', name: 'BlackBerry (BB10, Android & BBOS)', icon: 'Shield', count: 'Autoloaders & Fastboot' },
+      { id: 'jio', name: 'Reliance JioPhone (KaiOS & Pragati)', icon: 'Radio', count: 'QFIL Firehose & SPD PAC' },
+      { id: 'micromax', name: 'Micromax (IN Series & Canvas)', icon: 'Smartphone', count: 'SP Flash Tool & PAC' },
+      { id: 'lava', name: 'Lava (Agni 5G, Blaze & Yuva)', icon: 'Flame', count: 'Dimensity & Unisoc ROMs' },
+      { id: 'max', name: 'Max / Maxx Mobile (Android & Keypad)', icon: 'Zap', count: 'SP Flash & SPD PAC' }
     ]
   });
 });
