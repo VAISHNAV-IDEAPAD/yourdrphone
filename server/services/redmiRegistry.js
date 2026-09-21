@@ -219,6 +219,50 @@ const REDMI_AND_XIAOMI_REGISTRY = [
       { version: 'HyperOS 1.0 Global (OS1.0.5.0.TKEMIXM)', build: 'OS1.0.5.0.TKEMIXM', date: 'Jun 2024', size: '5.8 GB', region: 'Global', type: 'Fastboot ROM (tgz)', url: 'https://bigota.d.miui.com/OS1.0.5.0.TKEMIXM/fleur_global_images_OS1.0.5.0.TKEMIXM_20240620.0000.00_13.0_glo_93cf7210db.tgz', signed: true }
     ]
   },
+  {
+    model: 'Redmi Note 11T 5G',
+    code: 'evergo',
+    brand: 'redmi',
+    series: 'Redmi Note',
+    chipset: 'Dimensity 810 5G',
+    firmwares: [
+      { version: 'HyperOS 1.0 India (OS1.0.1.0.TGBINXM)', build: 'OS1.0.1.0.TGBINXM', date: 'Jul 2024', size: '5.6 GB', region: 'India', type: 'Recovery ROM (zip)', url: 'https://bigota.d.miui.com/OS1.0.1.0.TGBINXM/miui_EVERGOINGlobal_OS1.0.1.0.TGBINXM_81ca7210db_13.0.zip', signed: true },
+      { version: 'MIUI 14 India (V14.0.4.0.TGBINXM)', build: 'V14.0.4.0.TGBINXM', date: 'Aug 2023', size: '5.3 GB', region: 'India', type: 'Fastboot ROM (tgz)', url: 'https://bigota.d.miui.com/V14.0.4.0.TGBINXM/evergo_in_images_V14.0.4.0.TGBINXM_20230810.0000.00_13.0_in_1928fb810c.tgz', signed: true },
+      { version: 'MIUI 14 India Recovery (V14.0.4.0.TGBINXM)', build: 'V14.0.4.0.TGBINXM', date: 'Aug 2023', size: '3.9 GB', region: 'India', type: 'Recovery ROM (zip)', url: 'https://bigota.d.miui.com/V14.0.4.0.TGBINXM/miui_EVERGOINGlobal_V14.0.4.0.TGBINXM_83fc7192ba_13.0.zip', signed: true }
+    ]
+  },
+  {
+    model: 'Redmi Note 11T Pro / Pro+ 5G',
+    code: 'xaga',
+    brand: 'redmi',
+    series: 'Redmi Note',
+    chipset: 'Dimensity 8100 5G',
+    firmwares: [
+      { version: 'HyperOS 1.0 Global (OS1.0.6.0.ULOMIXM)', build: 'OS1.0.6.0.ULOMIXM', date: 'Jul 2024', size: '6.9 GB', region: 'Global / POCO X4 GT', type: 'Fastboot ROM (tgz)', url: 'https://bigota.d.miui.com/OS1.0.6.0.ULOMIXM/xaga_global_images_OS1.0.6.0.ULOMIXM_20240715.0000.00_14.0_glo_48bf9182dc.tgz', signed: true },
+      { version: 'HyperOS 1.0 Recovery (OS1.0.6.0.ULOMIXM)', build: 'OS1.0.6.0.ULOMIXM', date: 'Jul 2024', size: '5.5 GB', region: 'Global', type: 'Recovery ROM (zip)', url: 'https://bigota.d.miui.com/OS1.0.6.0.ULOMIXM/miui_XAGAGlobal_OS1.0.6.0.ULOMIXM_73ca8190fd_14.0.zip', signed: true },
+      { version: 'HyperOS 1.0 China (OS1.0.9.0.ULOCNXM)', build: 'OS1.0.9.0.ULOCNXM', date: 'Jul 2024', size: '6.8 GB', region: 'China', type: 'Fastboot ROM (tgz)', url: 'https://bigota.d.miui.com/OS1.0.9.0.ULOCNXM/xaga_images_OS1.0.9.0.ULOCNXM_20240710.0000.00_14.0_cn_81fe9182ba.tgz', signed: true }
+    ]
+  },
+  {
+    model: 'Redmi Note 11S 5G',
+    code: 'opal',
+    brand: 'redmi',
+    series: 'Redmi Note',
+    chipset: 'Dimensity 810 5G',
+    firmwares: [
+      { version: 'MIUI 14 Global (V14.0.5.0.TGLMIXM)', build: 'V14.0.5.0.TGLMIXM', date: 'Aug 2023', size: '5.2 GB', region: 'Global', type: 'Fastboot ROM (tgz)', url: 'https://bigota.d.miui.com/V14.0.5.0.TGLMIXM/opal_global_images_V14.0.5.0.TGLMIXM_20230815.0000.00_13.0_glo_42fe8190ba.tgz', signed: true }
+    ]
+  },
+  {
+    model: 'Redmi Note 11E / 11R 5G',
+    code: 'light',
+    brand: 'redmi',
+    series: 'Redmi Note',
+    chipset: 'Dimensity 700 5G',
+    firmwares: [
+      { version: 'MIUI 14 Global (V14.0.7.0.TLSMIXM)', build: 'V14.0.7.0.TLSMIXM', date: 'Sep 2023', size: '4.9 GB', region: 'Global', type: 'Fastboot ROM (tgz)', url: 'https://bigota.d.miui.com/V14.0.7.0.TLSMIXM/light_global_images_V14.0.7.0.TLSMIXM_20230910.0000.00_13.0_glo_71ba8290fa.tgz', signed: true }
+    ]
+  },
 
   // ==========================================
   // REDMI NOTE 10 SERIES
